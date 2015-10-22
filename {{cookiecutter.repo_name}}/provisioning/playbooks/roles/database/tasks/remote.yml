@@ -1,0 +1,50 @@
+{% raw %}
+##
+# Db installation and creation
+# When provisioning the remote host a user is created tied to the newly created db
+#
+# The template .my.cnf is used to login to the remote mysql server
+#
+##
+---
+    - name: install mysql-server
+      sudo: true
+      apt: name=mysql-server state=present
+
+    - name: install python-mysqldb
+      sudo: true
+      apt: name=python-mysqldb state=present
+
+    - name: copy .my.cnf file with root password credentials
+      template: src=my.cnf dest=/root/.my.cnf owner=root mode=0600
+
+    # 'localhost' needs to be the last item for idempotency, see
+    # http://ansible.cc/docs/modules.html#mysql-user
+    - name: update mysql root password for all root accounts
+      mysql_user: name=root host={{ item }} password={{ mysql_root_password }}
+      with_items:
+        - "{{ ansible_hostname }}"
+        - 127.0.0.1
+        - ::1
+        - localhost
+
+    - name: delete anonymous MySQL server user for $ansible_hostname
+      action: mysql_user user="" host="{{ ansible_hostname }}" state="absent"
+
+    - name: delete anonymous MySQL server user for localhost
+      action: mysql_user user="" state="absent"
+
+    - name: remove the MySQL test database
+      action: mysql_db db=test state=absent
+
+    - name: create database
+      sudo: true
+      mysql_db:
+        name={{ db_name }}
+        encoding=utf8
+      notify: restart db service
+
+    - name: create db user
+      mysql_user: name={{ db_user }} password={{ db_password }} priv={{ db_name }}.*:ALL state=present
+      notify: restart db service
+{% endraw %}

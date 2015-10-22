@@ -1,0 +1,7 @@
+{% raw %}
+---
+    - include: local.yml
+      when: provisioning == 'local'
+    - include: remote.yml
+      when: provisioning == 'remote'
+{% endraw %}

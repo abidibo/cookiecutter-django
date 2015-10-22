@@ -1,0 +1,4 @@
+---
+provisioning: 'local'
+domain: 'localhost'
+db_name: 'db_{{ cookiecutter.repo_name }}'

@@ -1,0 +1,4 @@
+# Production dependencies go here
+-r common.txt
+
+uWSGI==2.0.11.2

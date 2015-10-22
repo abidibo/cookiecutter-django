@@ -1,0 +1,18 @@
+##
+# Local playbook
+# - required system packages installation
+# - db installation and creation
+# - webapp initialization (requirements, migrations, repository)
+##
+---
+- hosts: localhost
+  vars:
+    repo_name: {{ cookiecutter.repo_name }}
+  pre_tasks:
+    - name: update apt cache
+      sudo: true
+      apt: update_cache=yes
+  roles:
+    - common
+    - database
+    - webapp

@@ -1,0 +1,22 @@
+{% raw %}
+##
+# Web server installation and configuration
+##
+---
+    - name: install nginx
+      apt: name=nginx state=present
+
+    - name: configure Nginx
+      template: src=nginx.conf dest=/etc/nginx/sites-available/{{ domain }} owner=root group=root mode=0644
+
+    - name: enable new virtual host
+      file:
+        src=/etc/nginx/sites-available/{{ domain }}
+        dest=/etc/nginx/sites-enabled/{{ domain }}
+        state=link
+
+    - name: copy maintenance page
+      template: src=maintenance.html dest="{{ webapp_dir }}/htdocs/maintenance.html"
+
+    - service: name=nginx state=restarted
+{% endraw %}

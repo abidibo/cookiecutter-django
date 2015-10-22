@@ -1,0 +1,27 @@
+{% raw %}
+##
+# Setup of the local webapp envorinment
+# - requirements installation
+# - db initial migration
+# - repository initialization
+# - sass compiler installation
+##
+---
+    - name: Install requirements
+      pip: requirements={{ base_dir }}/requirements/{{ provisioning }}.txt virtualenv={{ base_dir }}/.virtualenv
+
+    # Run syncdb on the application
+    - name: Sync DB
+      django_manage: >
+        command=migrate
+        app_path={{ base_dir }}/{{ repo_name }}
+        settings={{ repo_name }}.settings.local
+        virtualenv={{ base_dir }}/.virtualenv
+
+    - name: create repository
+      action: command chdir={{ base_dir }} creates={{ base_dir }}/HEAD git init
+
+    - name: install sass compiler
+      sudo: true
+      action: command chdir={{ base_dir }} gem install sass
+{% endraw %}

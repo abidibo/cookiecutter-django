@@ -1,0 +1,21 @@
+.navbar {
+    margin-bottom: 20px;
+}
+// bootstrap 3.* behavior
+#collapsingNavbar {
+    clear: both;
+    float: none;
+    ul li {
+        float: none;
+    }
+    .navbar-nav .nav-item {
+        margin-left: 1rem;
+    }
+    @include media-breakpoint-up(sm) {
+        clear: none;
+        float: right;
+        ul li {
+            float: left;
+        }
+    }
+}

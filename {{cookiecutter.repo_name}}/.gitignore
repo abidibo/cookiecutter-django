@@ -1,0 +1,7 @@
+*.swp
+*.pyc
+{{ cookiecutter.repo_name }}/.env
+.virtualenv
+{{ cookiecutter.repo_name }}/media
+provisioning/ansible_remote_variables
+provisioning/ansible_remote_inventory

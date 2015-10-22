@@ -1,0 +1,16 @@
+{% raw %}
+##
+# Db creation
+##
+---
+    - name: install python-mysqldb
+      sudo: true
+      apt: name=python-mysqldb state=present
+
+    - name: create database
+      sudo: true
+      mysql_db:
+        name={{ db_name }}
+        encoding=utf8
+      notify: restart db service
+{% endraw %}

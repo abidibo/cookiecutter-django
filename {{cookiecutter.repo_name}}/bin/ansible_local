@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# Setup of the local environment
+
+# http://stackoverflow.com/questions/59895/can-a-bash-script-tell-what-directory-its-stored-in
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )/../" && pwd )"
+
+echo "=================="
+echo "Local Provisioning"
+echo "=================="
+
+ansible-playbook --inventory-file="$DIR/provisioning/ansible_local_inventory" --extra-vars "@$DIR/provisioning/ansible_local_variables" --extra-vars "base_dir=$DIR" --ask-sudo-pass "$DIR/provisioning/playbooks/local.yml"

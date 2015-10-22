@@ -1,0 +1,20 @@
+##
+# Remote playobook
+# - Installation of required packages
+# - Db installation and creation, user db creation and privileges granted
+# - Web app initialization (user nd dirs creation)
+##
+---
+- hosts: remote
+  user: root
+  vars:
+    repo_name: {{ cookiecutter.repo_name }}
+  pre_tasks:
+    - name: update apt cache
+      sudo: true
+      apt: update_cache=yes
+  roles:
+    - common
+    - database
+    - webapp
+    - webserver

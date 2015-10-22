@@ -1,0 +1,43 @@
+Django==1.8.5
+django-getenv==1.3.1
+Fabric==1.10.2
+MySQL-python==1.2.5
+Pillow==3.0.0
+argparse==1.2.1
+django-ckeditor==5.0.2
+django-cleanup==0.4.0
+{% if cookiecutter.use_disqus %}
+django-disqus==0.5
+{% endif %}
+django-pipeline==1.5.4
+django-simple-captcha==0.4.6
+django-tagging==0.4
+ecdsa==0.13
+funcsigs==0.4
+futures==3.0.3
+mock==1.3.0
+paramiko==1.15.3
+pbr==1.8.1
+pycrypto==2.6.1
+six==1.10.0
+sorl-thumbnail==12.3
+wsgiref==0.1.2
+{% if cookiecutter.admin == 'django-suit' %}
+django-suit==0.2.15
+{% elif cookiecutter.admin == 'django-grappelli' %}
+django-grappelli==2.7.1
+{% endif %}
+{% if cookiecutter.use_filer == 'y' %}
+Unidecode==0.04.18
+django-filer==0.9.12
+django-mptt==0.7.4
+django-polymorphic==0.7.2
+easy-thumbnails==2.2
+{% endif %}
+Jinja2==2.8
+MarkupSafe==0.23
+PyYAML==3.11
+ansible==1.9.4
+click==5.1
+ordereddict==1.1
+python-dotenv==0.1.5
