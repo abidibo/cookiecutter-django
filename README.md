@@ -151,6 +151,12 @@ And visit http://localhost:8000
 
     `$ dotenv set SECRET_KEY <secret_key_here>`
 
+    you can change the remote SECRET KEY adding a line
+
+    `SECRET_KEY='<value here>'`
+
+    in the `provisioning/playbooks/roles/webapp/templates/env` file
+
 - you can also not specify the remote params during the installation. You will have a working local environment ready to go. But in this case you'll have to set them manually to configure the remote setup script which uses ansible. In this case check the followinf files:
     - `provisioning/ansible_remote_inventory`
     - `provisioning/ansible_remote_variables`
