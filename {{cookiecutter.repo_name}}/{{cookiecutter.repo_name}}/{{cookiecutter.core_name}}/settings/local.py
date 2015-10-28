@@ -13,9 +13,9 @@ INSTALLED_APPS += (
 
 # CKEDITOR
 CKEDITOR_CONFIGS['default']['contentsCss'] = [
-    STATIC_URL + '{{ cookiecutter.repo_name }}/src/vendor/Font-Awesome/scss/font-awesome.css',
-    STATIC_URL + '{{ cookiecutter.repo_name }}/src/scss/styles.css',
-    STATIC_URL + '{{ cookiecutter.repo_name }}/src/css/ckeditor.css']
+    STATIC_URL + '{{ cookiecutter.core_name }}/src/vendor/Font-Awesome/scss/font-awesome.css',
+    STATIC_URL + '{{ cookiecutter.core_name }}/src/scss/styles.css',
+    STATIC_URL + '{{ cookiecutter.core_name }}/src/css/ckeditor.css']
 
 # DEBUG_TOOLBAR
 JQUERY_URL = ''

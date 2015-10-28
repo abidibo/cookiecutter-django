@@ -9,6 +9,7 @@
   user: root
   vars:
     repo_name: {{ cookiecutter.repo_name }}
+    core_name: {{ cookiecutter.core_name }}
   pre_tasks:
     - name: update apt cache
       sudo: true

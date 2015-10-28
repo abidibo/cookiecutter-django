@@ -15,7 +15,7 @@
 - create a .env file    
   `$ touch .env`
 - config environment    
-  `$ dotenv set DJANGO_SETTINGS_MODULE {{ cookiecutter.repo_name }}.settings.local`    
+  `$ dotenv set DJANGO_SETTINGS_MODULE {{ cookiecutter.core_name }}.settings.local`    
   `$ dotenv set DB_PASSWORD <whatever>`
 - run the server    
   `$ bin/runserver`

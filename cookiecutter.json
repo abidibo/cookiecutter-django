@@ -8,6 +8,7 @@
     "project_name": "My New Project",
     "project_description": "My New Project description",
     "repo_name": "{{ cookiecutter.project_name|lower|replace(' ', '-') }}",
+    "core_name": "{{ cookiecutter.repo_name|replace('-', '_') }}",
     "admin": "default",
     "use_filer": "n",
     "use_disqus": "n",

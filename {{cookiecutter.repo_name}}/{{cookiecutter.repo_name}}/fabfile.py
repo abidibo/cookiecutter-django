@@ -1,75 +1,243 @@
-from fabric.api import *
-# Default release is 'current'
-env.release = 'current'
+import os
+from contextlib import contextmanager as _contextmanager
 
+from fabric.api import task
+from fabric.state import env
+from fabric.context_managers import show, settings, cd, prefix
+from fabric.contrib.files import is_link
+from fabric.operations import run, sudo, get, local, put, open_shell
+from fabric.contrib import files
+
+# path from here
+here = lambda *x: os.path.join(os.path.dirname(
+                               os.path.realpath(__file__)), *x)
+
+# https://gist.github.com/lost-theory/1831706
+class CommandFailed(Exception):
+    def __init__(self, message, result):
+        Exception.__init__(self, message)
+        self.result = result
+
+def erun(*args, **kwargs):
+    with settings(warn_only=True):
+        result = run(*args, **kwargs)
+    if result.failed:
+        raise CommandFailed("args: %r, kwargs: %r, error code: %r" % (args, kwargs, result.return_code), result)
+    return result
+
+@_contextmanager
+def remote_virtualenv(path):
+    # use when need to execute commands with activated virtualenv
+    with cd(path):
+        with prefix('source %(path)s/.virtualenv/bin/activate' % env):
+            yield
+
+@task
 def production():
-  """Production server settings"""
-  env.settings = 'production'
-  env.user = '{{ cookiecutter.remote_user }}'
-  env.path = '/home/%(user)s/sites/{{ cookiecutter.repo_name }}' % env
-  env.hosts = ['{{ cookiecutter.domain }}']
+    """Production server settings"""
+    env.settings = 'production'
+    env.user = '{{ cookiecutter.remote_user }}'
+    env.path = '{{ cookiecutter.webapp_dir }}'
+    env.hosts = ['{{ cookiecutter.domain }}']
 
-def setup():
-  """
-  Setup a fresh virtualenv and install everything we need so it's ready to deploy to
-  """
-  run('mkdir -p %(path)s; cd %(path)s; virtualenv --no-site-packages .; mkdir releases; mkdir shared;' % env)
-  clone_repo()
-  checkout_latest()
-  install_requirements()
+@task
+def get_remote_revision():
+    """ Returns and prints the current deployed remote revision """
+    current_app_dir = erun('basename $(readlink -f %(path)s/releases/current)' % env)
+    try:
+        _, remote_revision = current_app_dir.split('-')
+    except Exception as e:
+        print e
+        remote_revision = 'unknown'
 
-def deploy():
-  """Deploy the latest version of the site to the server and restart nginx"""
-  checkout_latest()
-  install_requirements()
-  symlink_current_release()
-  migrate()
-  restart_server()
+    print remote_revision
+    return remote_revision
 
-def clone_repo():
-  """Do initial clone of the git repo"""
-  run('cd %(path)s; git clone /home/%(user)s/git/repositories/{{ cookiecutter.repo_name }}.git repository' % env)
+def describe_revision(head='HEAD'):
+    """ Describes the current local revision"""
+    actual_tag = local('git describe --always %s' % head, capture=True)
+    return actual_tag
 
-def checkout_latest():
-  """Pull the latest code into the git repo and copy to a timestamped release directory"""
-  import time
-  env.release = time.strftime('%Y%m%d%H%M%S')
-  run("cd %(path)s/repository; git pull origin deployment" % env)
-  run('cp -R %(path)s/repository %(path)s/releases/%(release)s; rm -rf %(path)s/releases/%(release)s/.git*' % env)
+def get_release_filename():
+    return '%s.tar.gz' % describe_revision()
 
-def install_requirements():
-  """Install the required packages using pip"""
-  run('cd %(path)s; %(path)s/bin/pip install -r ./releases/%(release)s/requirements.txt --allow-external PIL --allow-unverified PIL' % env)
+def get_release_filepath():
+    releases_dir = here('..', 'releases')
+    if not os.path.exists(releases_dir):
+        os.makedirs(releases_dir)
+    return '../releases/%s' % get_release_filename()
 
-def symlink_current_release():
-  """Symlink our current release, uploads and settings file"""
-  with settings(warn_only=True):
-    run('cd %(path)s; rm releases/previous; mv releases/current releases/previous;' % env)
-  run('cd %(path)s; ln -s %(release)s releases/current' % env)
-  """ production settings"""
-  run('cd %(path)s/releases/current/; cp settings_%(settings)s.py torinometeo/settings.py' % env)
-  with settings(warn_only=True):
-    run('rm %(path)s/shared/static' % env)
-    run('cd %(path)s/releases/current/static/; ln -s %(path)s/releases/%(release)s/static %(path)s/shared/static ' %env)
+@task
+def create_release_archive(head='HEAD'):
+    """ Creates a local release archive """
+    local('git archive --worktree-attributes --format=tar.gz %s > %s' % (
+        head,
+        get_release_filepath()
+    ))
 
-def migrate():
-  """Run our migrations"""
-  run('cd %(path)s/releases/current; ../../bin/python manage.py migrate --noinput --settings=settings.production' % env)
+def sync_virtualenv(virtualenv_path, requirements_path):
+    """ Updates a virtualenv with  requirements file """
+    if not files.exists(virtualenv_path):
+        erun('virtualenv --no-site-packages %s' % virtualenv_path)
 
+    erun('source %s/bin/activate && pip install -r %s' % (
+        virtualenv_path,
+        requirements_path,
+    ))
+
+@task
+def deploy(head='HEAD', requirements='requirements/production.txt'):
+    """Deploy the latest version of the site to the server and restart services"""
+
+    create_release_archive()
+    release_filename = get_release_filename()
+
+    actual_version = describe_revision(head)
+    previous_version = None
+
+    remote_path = '%(path)s/releases' % env
+
+    release_dir = os.path.join(remote_path, 'app-%s' % describe_revision(head))
+    current_release_dir = os.path.join(remote_path, 'current')
+    previous_release_dir = os.path.join(remote_path, 'previous')
+    virtualenv_path = os.path.abspath(os.path.join(env.path, '.virtualenv'))
+
+    # and upload it to the server
+    if not files.exists(release_dir):
+        put(local_path=get_release_filepath(), remote_path=remote_path)
+
+    try:
+        # if exists remove dir
+        if files.exists(release_dir):
+            erun('rm -vfr %s' % (
+                release_dir,
+            ))
+        # create the remote dir
+        erun('mkdir -p %s' % release_dir)
+        erun('tar xf %s -C %s' % (
+            os.path.join(remote_path, release_filename),
+            release_dir,
+        ))
+        # remove tar
+        erun('rm %s' % os.path.join(remote_path, release_filename))
+        # copy .env
+        erun('cp %s %s' % (os.path.join(env.path, '.env'), release_dir))
+
+        sync_virtualenv(virtualenv_path, '%s/%s' % (release_dir, requirements,))# parametrize
+
+        with remote_virtualenv(release_dir):
+            erun('python manage.py collectstatic')
+            erun('python manage.py migrate')
+
+        # find the previous release and move/unlink it
+        if is_link(current_release_dir):
+            # TODO: move old deploy in the 'previous' directory
+            previous_deploy_path = erun('basename $(readlink -f %s)' % current_release_dir).stdout
+            idx = previous_deploy_path.index('-')
+            previous_version = previous_deploy_path[idx + 1:]
+
+            if previous_version != actual_version:
+                if files.exists(previous_release_dir):
+                    erun('rm -R %s' % previous_release_dir)
+                erun('mv %s %s' % (current_release_dir, previous_release_dir))
+
+        erun('ln -s %s %s' % (release_dir, current_release_dir))
+
+        restart()
+
+        print '''
+    ####################################
+    #              shell               #
+    ####################################
+    '''
+        print '''
+        %s --> %s
+            Use 'ps ax | grep uwsgi' to check uwsgi processes
+            If first deploy run 'python manage.py createsuperuser' to create new superuser
+        ''' % (previous_version, actual_version)
+        open_shell('cd %s && source %s/bin/activate' % (
+            current_release_dir,
+            virtualenv_path,
+        ))
+
+    except CommandFailed as e:
+        print 'An error occoured: %s' % e
+        print '''
+    ####################################
+    #        fallback to shell         #
+    ####################################
+    '''
+        print '''
+        %s --> %s
+            Use '../../.virtualenv/bi/uwsgi --ini uwsgi.ini' to start uwsgi
+        ''' % (previous_version, actual_version)
+        open_shell('cd %s && source %s/bin/activate' % (
+            release_dir,
+            virtualenv_path,
+        ))
+
+@task
 def rollback():
   """
   Limited rollback capability. Simple loads the previously current
   version of the code. Rolling back again will swap between the two.
   """
-  run('cd %(path)s; mv releases/current releases/_previous;' % env)
-  run('cd %(path)s; mv releases/previous releases/current;' % env)
-  run('cd %(path)s; mv releases/_previous releases/previous;' %env)
-  restart_server()
+  erun('cd %(path)s; mv releases/current releases/_previous;' % env)
+  erun('cd %(path)s; mv releases/previous releases/current;' % env)
+  erun('cd %(path)s; mv releases/_previous releases/previous;' %env)
+  restart()
 
+@task
+def restart():
+    """Restart uwsgi and web server"""
+    restart_uwsgi()
+    restart_server()
+
+@task
 def restart_server():
-  """Restart the web server"""
-  with settings(warn_only=True):
-    sudo('kill -9 `cat /tmp/project-master_{{ cookiecutter.repo_name }}.pid`')
-    sudo('rm /tmp/project-master_{{ cookiecutter.repo_name }}.pid /tmp/uwsgi_{{ cookiecutter.repo_name }}.sock')
-  run('cd %(path)s/releases/current; %(path)s/bin/uwsgi --ini %(path)s/releases/current/uwsgi.ini' % env)
-  sudo('/etc/init.d/nginx restart')
+    with settings(warn_only=True):
+        sudo('/etc/init.d/nginx restart')
+
+@task
+def restart_uwsgi():
+    """Restart uwsgi"""
+    with settings(warn_only=True):
+        sudo('kill -9 `cat /tmp/project-master_{{ cookiecutter.repo_name }}.pid`')
+        sudo('rm /tmp/project-master_{{ cookiecutter.repo_name }}.pid /tmp/uwsgi_{{ cookiecutter.repo_name }}.sock')
+        erun('cd %(path)s/releases/current; uwsgi -H %(path)s/.virtualenv --ini %(path)s/releases/current/uwsgi.ini' % env)
+
+
+def get_dump_filepath(prefix=u'backups'):
+    return '../%s/%s.sql' % (prefix, get_remote_revision())
+
+@task
+def dump_db_snapshot():
+    """ Dump of the production current db """
+    remote_tmp_file_path = '/tmp/dump_db.sql'
+    sudo('mysqldump --user {{ cookiecutter.db_user }} --password db{{ cookiecutter.repo_name }} > %s' % (remote_tmp_file_path))
+    get(remote_path=remote_tmp_file_path, local_path= get_dump_filepath(user))
+
+@task
+def load_db_snapshot():
+    """ Loads the production db snapshot in the local db """
+    dump_db_snapshot()
+    reset_db()
+    load_db()
+
+def reset_db():
+    """ Resets the local db """
+    local('python manage.py flush')
+
+@task
+def load_db():
+    local('cat %s | python manage.py dbshell' % get_dump_filepath())
+
+@task
+def offline():
+    """ Puts the site offline (manteinance page showed) """
+    erun('cd %(path)s/releases/current; touch .maintenance;' % env)
+
+@task
+def online():
+    """ Puts the site online (manteinance page removed) """
+    erun('cd %(path)s/releases/current; rm .maintenance;' % env)

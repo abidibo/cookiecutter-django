@@ -12,10 +12,16 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+from dotenv import load_dotenv
 from getenv import env
+
+here = lambda *x: os.path.join(os.path.dirname(
+                               os.path.realpath(__file__)), *x)
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
+dotenv_path = here('..', '..', '.env')
+load_dotenv(dotenv_path)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
@@ -81,7 +87,7 @@ INSTALLED_APPS = (
     'sorl.thumbnail',
     {% if cookiecutter.use_disqus == 'y' %}'disqus',{% endif %}
     'tagging',
-    '{{ cookiecutter.repo_name }}',
+    '{{ cookiecutter.core_name }}',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -95,7 +101,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.security.SecurityMiddleware',
 )
 
-ROOT_URLCONF = '{{ cookiecutter.repo_name }}.urls'
+ROOT_URLCONF = '{{ cookiecutter.core_name }}.urls'
 
 TEMPLATES = [
     {
@@ -114,7 +120,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = '{{ cookiecutter.repo_name }}.wsgi.application'
+WSGI_APPLICATION = '{{ cookiecutter.core_name }}.wsgi.application'
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
@@ -206,30 +212,30 @@ CKEDITOR_CONFIGS = {
 PIPELINE_CSS = {
     'vendor': {
         'source_filenames': (
-            '{{ cookiecutter.repo_name }}/src/vendor/Font-Awesome/scss/font-awesome.scss',
+            '{{ cookiecutter.core_name }}/src/vendor/Font-Awesome/scss/font-awesome.scss',
         ),
-        'output_filename': '{{ cookiecutter.repo_name }}/css/vendor.min.css',
+        'output_filename': '{{ cookiecutter.core_name }}/css/vendor.min.css',
     },
     '{{ cookiecutter.repo_name }}': { # bootstrap + custom
         'source_filenames': (
-            '{{ cookiecutter.repo_name }}/src/scss/styles.scss',
+            '{{ cookiecutter.core_name }}/src/scss/styles.scss',
         ),
-        'output_filename': '{{ cookiecutter.repo_name }}/css/{{ cookiecutter.repo_name }}.min.css',
+        'output_filename': '{{ cookiecutter.core_name }}/css/{{ cookiecutter.core_name }}.min.css',
     },
 }
 PIPELINE_JS = {
     'vendor': {
         'source_filenames': (
-            '{{ cookiecutter.repo_name }}/src/vendor/bootstrap/js/bootstrap.min.js',
-            '{{ cookiecutter.repo_name }}/src/vendor/moment/moment-with-locales.min.js',
+            '{{ cookiecutter.core_name }}/src/vendor/bootstrap/js/bootstrap.min.js',
+            '{{ cookiecutter.core_name }}/src/vendor/moment/moment-with-locales.min.js',
         ),
-        'output_filename': '{{ cookiecutter.repo_name }}/js/vendor.min.js'
+        'output_filename': '{{ cookiecutter.core_name }}/js/vendor.min.js'
     },
     '{{ cookiecutter.repo_name }}': {
         'source_filenames': (
-            '{{ cookiecutter.repo_name }}/src/js/{{ cookiecutter.repo_name }}.js',
+            '{{ cookiecutter.core_name }}/src/js/{{ cookiecutter.core_name }}.js',
         ),
-        'output_filename': ' {{ cookiecutter.repo_name }}/js/{{ cookiecutter.repo_name }}.min.js'
+        'output_filename': '{{ cookiecutter.core_name }}/js/{{ cookiecutter.core_name }}.min.js'
     },
 }
 
@@ -237,6 +243,7 @@ PIPELINE_COMPILERS = (
     'pipeline.compilers.sass.SASSCompiler',
 )
 PIPELINE_CSS_COMPRESSOR = None
+PIPELINE_JS_COMPRESSOR = None
 
 {% if cookiecutter.use_disqus == 'y' %}
 DISQUS_API_KEY = ''
@@ -253,3 +260,70 @@ THUMBNAIL_PROCESSORS = (
     'easy_thumbnails.processors.filters',
 )
 {% endif %}
+
+# LOGGING
+
+LOGGING_DEFAULT = {
+    'handlers': ['console', 'file'],
+    'level': 'DEBUG',
+    'propagate': True,
+}
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
+        },
+        'simple': {
+            'format': '%(levelname)s %(message)s'
+        },
+    },
+    'handlers': {
+       'null': {
+            'level': 'DEBUG',
+            'class':'django.utils.log.NullHandler',
+        },
+        'console':{
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose'
+        },
+        # configure the log to be rotated daily
+        # see https://docs.python.org/2.7/library/logging.handlers.html#logging.handlers.TimedRotatingFileHandler
+        'file': {
+            'level': 'DEBUG',
+            'formatter': 'verbose',
+            'class': 'logging.handlers.TimedRotatingFileHandler',
+            'filename': here('..', '..', '..', os.path.join('logs', 'debug.log')),
+            'when':     'midnight',
+        },
+
+        'mail_admins': {
+            'level': 'ERROR',
+            'class': 'django.utils.log.AdminEmailHandler',
+            'include_html': True,
+        }
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+        'django.request': {
+            'handlers': ['mail_admins', 'console', 'file',],
+            'level': 'ERROR',
+            'propagate': False,
+        },
+        # http://stackoverflow.com/questions/7768027/turn-off-sql-logging-while-keeping-settings-debug
+       'django.db.backends': {
+            'handlers': ['null'],  # Quiet by default!
+            'propagate': False,
+            'level':'DEBUG',
+        },
+        '{{ cookiecutter.core_name }}': LOGGING_DEFAULT,
+        '':                             LOGGING_DEFAULT,# root logger
+    },
+}

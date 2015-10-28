@@ -13,6 +13,9 @@
       sudo: true
       apt: name={{ item }} state=present update_cache=yes
       with_items:
+        - libfreetype6-dev
+        - zlib1g-dev
+        - libjpeg-dev
         - sshpass
         - python-dev
         - python-virtualenv

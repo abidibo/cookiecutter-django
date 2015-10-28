@@ -15,15 +15,19 @@
     - name: Creates dirs
       file: path={{ webapp_dir }}/{{ item }} state=directory owner={{ user }} group={{ user }}
       with_items:
-        - app
         - media
         - static
         - htdocs
+        - releases
+        - logs
 
     - name: Create maintenance file
       become: true
       become_user: '{{ user }}'
-      command: touch {{ webapp_dir }}/app/.maintenance
+      command: touch {{ webapp_dir }}/htdocs/.maintenance
+
+    - name: copy env file
+      template: src=env dest="{{ webapp_dir }}/.env"
 
     - name: install sass compiler
       action: command chdir={{ webapp_dir }} gem install sass

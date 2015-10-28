@@ -3,11 +3,19 @@
 This is just another cookiecutter template for django projects, matching my job requirements.
 There are many out there which are great but I needed one following my consolidated workflow.
 
-Running this you will have a development ready django project with all the packages installed and the database created and ready to go.
+Running this you will have:
 
-You will be provided with a bin command which will set up the remote machine for you, using ansible. 
+- a development ready django project with all the packages installed and the database created and ready to go.
+- a bin command which will set up the remote machine for you (using ansible) and will display a maintenance page
+- some production commands to manage the deploy and related stuff.
 
 ## Environment
+
+[Cookiecutter](https://github.com/audreyr/cookiecutter) is uset to create a working directory already configured.
+
+[Ansible](https://github.com/ansible/ansible) is used to set up the local and remote machines
+
+[Fabric](http://www.fabfile.org/) is used to manage the deploy and other related tasks.
 
 ### Local
 
@@ -23,12 +31,23 @@ You will be provided with a bin command which will set up the remote machine for
 ## Features
 
 - django db settings managed with environment variables
-- some must-have (in my opinion) packages installed
+- some must-have (in my opinion) packages installed:
+    - [django-pipeline](https://github.com/cyberdelia/django-pipeline)
+    - [django-ckeditor](https://github.com/django-ckeditor/django-ckeditor)
+    - [django-cleanup](https://github.com/un1t/django-cleanup)
+    - [django-simple-captcha](https://github.com/mbi/django-simple-captcha)
+    - [django-tagging](https://github.com/brosner/django-tagging)
+    - [sorl-thumbnail](https://github.com/mariocesar/sorl-thumbnail)
+    - [django-debug-toolbar](https://github.com/django-debug-toolbar/django-debug-toolbar)
+    - [django-suit](http://djangosuit.com/) (optional)
+    - [django-grappelli](https://github.com/sehmaschine/django-grappelli) (optional)
+    - [django-filer](https://github.com/stefanfoulis/django-filer) (optional)
+    - [django-disqus](https://github.com/arthurk/django-disqus) (optional)
 - flatpatges with integrated ckeditor
 - git repository initialized and ready
-- fabfile ready for deployment
 - bootstrap-4-dev
 - bin command to set up your production machine
+- fabfile ready for deployment
 
 ## Constraints
 
@@ -70,6 +89,8 @@ You will be provided with a bin command which will set up the remote machine for
 
 ### Vendor
 
+jQuery as js framework, bootstrap as css framework, momentjs to deal with datetime objects.
+
 - jQuery 1.11.3
 - moment.js
 - bootstrap v4.0.0-alpha
@@ -89,7 +110,8 @@ Answer the following questions:
 
 - __project_name__: name of the project. Default "My New Project"
 - __project_description__: project description. Default "My New Project description"
-- __repo_name__: name of the repository. Default "[project_name | lower | replace(' ', '-')]"
+- __repo\_name__: name of the repository. Default "[project\_name | lower | replace(' ', '-')]"
+- __core\_name__: name of the main application. Default "[repo\_name | replace('-', '\_')]"
 - __admin__: django admin app package. Possible values: django-suit, django-grappelli, default. Default "default"
 - __use_filer__: whether or not to install django-filer [y|n]. Default "n"
 - __use_disqus__: whether or not to install django-disqus [y|n]. Default "n"
@@ -101,9 +123,10 @@ Answer the following questions:
 - __domain__: production domain. Default "www.example.com"
 - __remote\_root\_mysql\_pwd__: password for the remote mysql root user. Default "". You can set it later inside the `provisioning/playbooks/roles/database/templates/.my.cnf` file
 - __db\_user__: user for the remote database. Default "[remote\_user]"
-- __db\_password__: user password for the remote database. Default ""
+- __db\_user_pwd__: user password for the remote database. Default ""
+- __webapp\_dir__: absolute path to the remote deploy directory
 
-Then provide your sudo password in order to provision your local environment.
+__Then provide your sudo password in order to provision your local environment.__
 
 If all works great now you should have:
 
@@ -112,7 +135,7 @@ If all works great now you should have:
 - a fresh virtualenv with all the dependencies already installed (folder `.virtualenv` in the root)
 - a new database ready to go with, all migrations applied
 - a new git repository initialized
-- a README file explaining how to proceed
+- a README file explaining how to clone and get started with the project
 
 Now:
 
@@ -122,12 +145,16 @@ Now:
 
 And visit http://localhost:8000
 
-## Notes
+### Notes
 
-- change the SECRET_KEY setting in your `[repo_name]/settings/common.py` settings file.
+- change the SECRET\_KEY:
+
+    `$ dotenv set SECRET_KEY <secret_key_here>`
+
 - you can also not specify the remote params during the installation. You will have a working local environment ready to go. But in this case you'll have to set them manually to configure the remote setup script which uses ansible. In this case check the followinf files:
     - `provisioning/ansible_remote_inventory`
     - `provisioning/ansible_remote_variables`
+    - `[repo_name]/fabfile.py`
 
 ## Remote setup
 
@@ -159,3 +186,75 @@ maybe you're trying to create a user which already existed and was delete. In th
     FLUSH PRIVILEGES;
 
 see [this answer on stack overflow](http://stackoverflow.com/questions/5555328/error-1396-hy000-operation-create-user-failed-for-jacklocalhost])
+
+## Deploy and Stuff
+
+In the deployment process, the last revision of the git repository is deployed to the remote server.
+So be sure to have committed all your changes:
+
+    $ git add --all
+    $ git commit -a -m "first commit"
+
+Be sure the provided remote user has ssh access to the remote host, then deploy should be as easy as:
+
+    $ cd [repo_name]
+    $ fab production deploy
+
+launched inside the root/repo\_name folder. This command does the following things:
+
+- create an archive of the last repository revision
+- upload it to the server
+- untar it in a folder "app-revision\_id" inside the releases folder
+- copy the .env file inside this folder
+- upgrade the virtualenv
+- collectstatic
+- migrations
+- move the current release in the previous release (releases/previous)
+- link the releases/current folder to the new release folder
+- restart uwsgi and nginx
+- open a shell in the remote
+
+When performing the first deploy you can create a superuser account using the shell which the script leaves open at the end.
+
+###Other useful fab commands
+
+#### rollback
+
+    $ fab production rollback
+
+If the deploy revision is broken, or introduces unexpected errors, with this command
+it is possible to rollback to the previous revision. Launching it another time will swap between the two revisions.
+
+#### restart\_uwsgi
+
+    $ fab production restart_uwsgi
+
+Restarts the uwsgi service
+
+#### restart\_server
+
+    $ fab production restart_server
+
+Restarts the web server
+
+#### restart
+
+    $ fab production restart
+
+Restarts the uwsgi service and the web server
+
+#### dump\_db\_snapshot
+
+    $ fab production dump_db_snapshot
+
+Downloads the production current db snapshot in the backup folders. The dumped file has the remote current revision name.
+
+Requires the remote db user password.
+
+#### load\_db\_snapshot
+
+    $ fab production load_db_snapshot
+
+Loads the current remote db snapshot in the local db.
+
+Requires the remote db user password.
