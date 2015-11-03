@@ -6,12 +6,14 @@
 
 - clone the repository    
   `$ git clone https://github.com/{{ cookiecutter.author }}/{{ cookiecutter.repo_name }}.git`
+- cd the new project    
+  `$ cd [repo_name]`
 - create a virtualenv    
   `$ virtualenv --no-site-packages .virtualenv`
 - activate it    
-  `$ source .venv/bin/activate`
+  `$ source .virtualenv/bin/activate`
 - install requirements    
-  `$ pip install -r requirements/local.txt`
+  `$ pip install -r [repo_name]/requirements/local.txt`
 - create a .env file    
   `$ touch .env`
 - config environment    

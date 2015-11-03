@@ -119,7 +119,7 @@ Answer the following questions:
 - __timezone__: timezone. Default "Europe/Rome"
 - __author__: project author. Default "abidibo"
 - __email__: project author email. Default "abidibo@gmail.com"
-- __remote\_user__: user for deployment to the production server. Default "[repo_name]"
+- __remote\_user__: user for deployment to the production server. Default "[repo\_name]"
 - __domain__: production domain. Default "www.example.com"
 - __remote\_root\_mysql\_pwd__: password for the remote mysql root user. Default "". You can set it later inside the `provisioning/playbooks/roles/database/templates/.my.cnf` file
 - __db\_user__: user for the remote database. Default "[remote\_user]"
@@ -151,11 +151,9 @@ And visit http://localhost:8000
 
     `$ dotenv set SECRET_KEY <secret_key_here>`
 
-    you can change the remote SECRET KEY adding a line
+  you can change the remote SECRET KEY adding a line
 
     `SECRET_KEY='<value here>'`
-
-    in the `provisioning/playbooks/roles/webapp/templates/env` file
 
 - you can also not specify the remote params during the installation. You will have a working local environment ready to go. But in this case you'll have to set them manually to configure the remote setup script which uses ansible. In this case check the followinf files:
     - `provisioning/ansible_remote_inventory`

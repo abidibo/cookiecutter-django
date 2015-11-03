@@ -173,7 +173,7 @@ SUIT_CONFIG = {
         {% endif %}
         '-',
 
-        {'app': 'flatpages', 'label': 'Flatpages', 'icon':'icon-book'},
+        {'app': 'flatpages', 'label': 'Pagine', 'icon':'icon-book'},
 
     )
 }
