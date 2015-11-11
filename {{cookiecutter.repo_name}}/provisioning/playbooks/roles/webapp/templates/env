@@ -1,0 +1,5 @@
+DJANGO_SETTINGS_MODULE="{{ cookiecutter.core_name }}.settings.production"
+DB_NAME="db{{ cookiecutter.repo_name }}"
+DB_USER="{{ cookiecutter.db_user }}"
+DB_PASSWORD="{{ cookiecutter.db_user_pwd }}"
+PYTHONUNBUFFERED="true"

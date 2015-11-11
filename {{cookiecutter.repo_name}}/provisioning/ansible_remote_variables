@@ -1,0 +1,10 @@
+---
+provisioning: 'remote'
+domain: '{{ cookiecutter.domain }}'
+mysql_root_password: '{{ cookiecutter.remote_root_mysql_pwd }}'
+db_user: '{{ cookiecutter.db_user }}'
+db_password: '{{ cookiecutter.db_user_pwd }}'
+db_name: 'db{{ cookiecutter.repo_name }}'
+user: '{{ cookiecutter.remote_user }}'
+password: '{{ cookiecutter.remote_password }}'
+webapp_dir: '{{ cookiecutter.webapp_dir }}'
