@@ -169,7 +169,7 @@ def deploy(head='HEAD', requirements='requirements/production.txt'):
     '''
         print '''
         %s --> %s
-            Use '../../.virtualenv/bi/uwsgi --ini uwsgi.ini' to start uwsgi
+            Use '../../.virtualenv/bin/uwsgi --ini uwsgi.ini' to start uwsgi
         ''' % (previous_version, actual_version)
         open_shell('cd %s && source %s/bin/activate' % (
             release_dir,
@@ -202,10 +202,10 @@ def restart_server():
 def restart_uwsgi():
     """Restart uwsgi"""
     with settings(warn_only=True):
+        env.virtualenv_path = os.path.abspath(os.path.join(env.path, '.virtualenv'))
         sudo('kill -9 `cat /tmp/project-master_{{ cookiecutter.repo_name }}.pid`')
         sudo('rm /tmp/project-master_{{ cookiecutter.repo_name }}.pid /tmp/uwsgi_{{ cookiecutter.repo_name }}.sock')
-        erun('cd %(path)s/releases/current; uwsgi -H %(path)s/.virtualenv --ini %(path)s/releases/current/uwsgi.ini' % env)
-
+        erun('cd %(path)s/releases/current; %(virtualenv_path)s/bin/uwsgi -H %(virtualenv_path)s --ini %(path)s/releases/current/uwsgi.ini' % env)
 
 def get_dump_filepath(prefix=u'backups'):
     return '../%s/%s.sql' % (prefix, get_remote_revision())
