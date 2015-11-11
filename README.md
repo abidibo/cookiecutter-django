@@ -184,7 +184,7 @@ If you see this error
 
     fatal: [remote] => Using a SSH password instead of a key is not possible because Host Key checking is enabled and sshpass does not support this.  Please add this host's fingerprint to your known_hosts file to manage this host.
 
-means you missed adding an entry for one or more hosts in the ~/.ssh/known_hosts file, it's enough to 
+means you missed adding an entry for one or more hosts in the ~/.ssh/known\_hosts file, it's enough to try an ssh connection in order to add the domain to your list, then relauch `bin/ansible_remote`
 
 #### DB task error
 If an error occurs in the create db user task:
