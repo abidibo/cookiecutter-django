@@ -147,6 +147,12 @@ And visit http://localhost:8000
 
 ### Notes
 
+- setup local environment manually    
+  maybe you don't want ansible to setup the local environment for you (for example if you are on a mac some commands will fail), so just
+  interrupt the execution of cookiecutter (CTRL-C) when you're prompted for the sudo password. You can then check the provisioning files,
+  change them and then launch `bin/ansible_local` manually
+
+
 - change the SECRET\_KEY:
 
     `$ dotenv set SECRET_KEY <secret_key_here>`
