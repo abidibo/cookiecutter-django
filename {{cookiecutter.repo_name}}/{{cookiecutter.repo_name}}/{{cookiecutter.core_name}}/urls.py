@@ -1,4 +1,4 @@
-"""cippa URL Configuration
+"""URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/1.8/topics/http/urls/
@@ -23,6 +23,10 @@ urlpatterns = [
     url(r'^$', TemplateView.as_view(template_name='home.html'), name='home'),
     # ckeditor uploader
     url(r'^ckeditor/', include('ckeditor_uploader.urls')),
+    {% if cookiecutter.admin == 'django-grappelli' %}
+    # grappelli
+    url(r'^grappelli/', include('grappelli.urls')),
+    {% endif %}
 ]
 
 if settings.DEBUG:
