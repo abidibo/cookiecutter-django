@@ -11,7 +11,7 @@ django-disqus==0.5
 {% endif %}
 django-pipeline==1.5.4
 django-simple-captcha==0.4.6
-django-tagging==0.4
+django-taggit==0.18.0
 ecdsa==0.13
 funcsigs==0.4
 futures==3.0.3

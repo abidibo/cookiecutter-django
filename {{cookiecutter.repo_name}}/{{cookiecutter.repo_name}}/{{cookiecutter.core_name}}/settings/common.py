@@ -86,7 +86,7 @@ INSTALLED_APPS = (
     'captcha',
     'sorl.thumbnail',
     {% if cookiecutter.use_disqus == 'y' %}'disqus',{% endif %}
-    'tagging',
+    'taggit',
     '{{ cookiecutter.core_name }}',
 )
 

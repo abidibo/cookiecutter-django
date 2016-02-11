@@ -36,7 +36,7 @@ Running this you will have:
     - [django-ckeditor](https://github.com/django-ckeditor/django-ckeditor)
     - [django-cleanup](https://github.com/un1t/django-cleanup)
     - [django-simple-captcha](https://github.com/mbi/django-simple-captcha)
-    - [django-tagging](https://github.com/brosner/django-tagging)
+    - [django-taggit](https://github.com/alex/django-taggit)
     - [sorl-thumbnail](https://github.com/mariocesar/sorl-thumbnail)
     - [django-debug-toolbar](https://github.com/django-debug-toolbar/django-debug-toolbar)
     - [django-suit](http://djangosuit.com/) (optional)
@@ -65,7 +65,7 @@ Running this you will have:
 - django-cleanup==0.4.0
 - django-pipeline==1.5.4
 - django-simple-captcha==0.4.6
-- django-tagging==0.4
+- django-taggit==0.18.0
 - sorl-thumbnail==12.3
 - ansible==1.9.4
 - python-dotenv==0.1.5
