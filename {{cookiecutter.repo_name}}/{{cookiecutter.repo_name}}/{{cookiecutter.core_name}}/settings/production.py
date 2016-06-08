@@ -10,7 +10,7 @@ DEBUG = False
 ALLOWED_HOSTS = ['{{ cookiecutter.domain }}',]
 
 STATIC_ROOT = '{{ cookiecutter.webapp_dir }}/static/'
-MEDIA_ROOT = '{{ cookiecutter.webapp_dir }}/media/'
+MEDIA_ROOT = '{{ cookiecutter.webapp_dir }}/media'
 # CKEDITOR
 CKEDITOR_CONFIGS['default']['contentsCss'] = [
     STATIC_URL + '{{ cookiecutter.core_name }}/css/vendor.min.css',
