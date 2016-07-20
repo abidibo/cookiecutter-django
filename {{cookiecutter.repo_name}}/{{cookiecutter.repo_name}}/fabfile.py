@@ -126,7 +126,7 @@ def deploy(head='HEAD', requirements='requirements/production.txt'):
         sync_virtualenv(virtualenv_path, '%s/%s' % (release_dir, requirements,))# parametrize
 
         with remote_virtualenv(release_dir):
-            erun('python manage.py collectstatic')
+            erun('python manage.py collectstatic --noinput')
             erun('python manage.py migrate')
 
         # find the previous release and move/unlink it
@@ -191,7 +191,12 @@ def rollback():
 def restart():
     """Restart uwsgi and web server"""
     restart_uwsgi()
-    restart_server()
+    reload_server()
+
+@task
+def reload_server():
+    with settings(warn_only=True):
+        sudo('/etc/init.d/nginx reload')
 
 @task
 def restart_server():

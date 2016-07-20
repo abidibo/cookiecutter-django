@@ -221,7 +221,7 @@ launched inside the root/repo\_name folder. This command does the following thin
 - migrations
 - move the current release in the previous release (releases/previous)
 - link the releases/current folder to the new release folder
-- restart uwsgi and nginx
+- restart uwsgi and reload nginx
 - open a shell in the remote
 
 When performing the first deploy you can create a superuser account using the shell which the script leaves open at the end.
@@ -240,6 +240,12 @@ it is possible to rollback to the previous revision. Launching it another time w
     $ fab production restart_uwsgi
 
 Restarts the uwsgi service
+
+#### reload\_server
+
+    $ fab production reload_server
+
+Reloads the web server
 
 #### restart\_server
 
