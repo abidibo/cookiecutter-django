@@ -18,6 +18,7 @@
         - libjpeg-dev
         - sshpass
         - python-dev
+        - libffi-dev
         - python-virtualenv
         - ruby
         - vim

@@ -16,6 +16,8 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 from django.conf import settings
+from django.views.static import serve
+from django.contrib.staticfiles import views as staticfiles_views
 from django.views.generic import TemplateView
 
 urlpatterns = [
@@ -31,8 +33,8 @@ urlpatterns = [
 
 if settings.DEBUG:
     urlpatterns += [
-        url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
+        url(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
     ]
     urlpatterns += [
-        url(r'^static/(?P<path>.*)$', 'django.contrib.staticfiles.views.serve'),
+        url(r'^static/(?P<path>.*)$', staticfiles_views.serve),
     ]
