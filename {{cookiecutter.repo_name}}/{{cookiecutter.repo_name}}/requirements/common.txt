@@ -20,7 +20,7 @@ paramiko==2.0.2
 pbr==1.8.1
 pycrypto==2.6.1
 six==1.10.0
-sorl-thumbnail==12.3
+easy-thumbnails==2.3
 wsgiref==0.1.2
 {% if cookiecutter.admin == 'django-suit' %}
 django-suit==0.2.21
@@ -32,7 +32,6 @@ Unidecode==0.4.19
 django-filer==1.2.4
 django-mptt==0.8.6
 django-polymorphic==0.8.1
-easy-thumbnails==2.3
 {% endif %}
 Jinja2==2.8
 MarkupSafe==0.23

@@ -37,7 +37,7 @@ Running this you will have:
     - [django-cleanup](https://github.com/un1t/django-cleanup)
     - [django-simple-captcha](https://github.com/mbi/django-simple-captcha)
     - [django-taggit](https://github.com/alex/django-taggit)
-    - [sorl-thumbnail](https://github.com/mariocesar/sorl-thumbnail)
+    - [easy-thumbnails](https://github.com/SmileyChris/easy-thumbnails)
     - [django-debug-toolbar](https://github.com/django-debug-toolbar/django-debug-toolbar)
     - [django-suit](http://djangosuit.com/) (optional)
     - [django-grappelli](https://github.com/sehmaschine/django-grappelli) (optional)
