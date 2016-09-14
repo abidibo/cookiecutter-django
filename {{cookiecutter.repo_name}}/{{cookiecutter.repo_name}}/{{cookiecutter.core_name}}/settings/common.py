@@ -57,7 +57,7 @@ DATABASES = {
         'PASSWORD': env('DB_PASSWORD', required=True),
         'PORT': '',
         'OPTIONS': {
-            'init_command': 'SET storage_engine=InnoDB',
+            'init_command': 'SET default_storage_engine=InnoDB',
         }
     }
 }
