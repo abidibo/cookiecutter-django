@@ -220,7 +220,7 @@ def dump_db_snapshot():
     """ Dump of the production current db """
     remote_tmp_file_path = '/tmp/dump_db.sql'
     sudo('mysqldump --user {{ cookiecutter.db_user }} --password db{{ cookiecutter.repo_name }} > %s' % (remote_tmp_file_path))
-    get(remote_path=remote_tmp_file_path, local_path= get_dump_filepath(user))
+    get(remote_path=remote_tmp_file_path, local_path= get_dump_filepath())
 
 @task
 def load_db_snapshot():
