@@ -65,6 +65,7 @@ DATABASES = {
 # Application definition
 
 INSTALLED_APPS = (
+    '{{ cookiecutter.core_name }}',
     {% if cookiecutter.admin == 'django-suit' %}'suit',{% elif cookiecutter.admin == 'django-grappelli' %}'grappelli',{% endif %}
     'django.contrib.sites',
     'django.contrib.admin',
@@ -87,7 +88,6 @@ INSTALLED_APPS = (
     'sorl.thumbnail',
     {% if cookiecutter.use_disqus == 'y' %}'disqus',{% endif %}
     'taggit',
-    '{{ cookiecutter.core_name }}',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -99,6 +99,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
 )
 
 ROOT_URLCONF = '{{ cookiecutter.core_name }}.urls'
@@ -174,7 +175,7 @@ SUIT_CONFIG = {
         {% endif %}
         '-',
 
-        {'app': 'flatpages', 'label': 'Pagine', 'icon':'icon-book'},
+        {'app': 'flatpages', 'label': 'Pages', 'icon':'icon-book'},
 
     )
 }
@@ -196,11 +197,13 @@ CKEDITOR_CONFIGS = {
                 ['Link','Unlink','Anchor'],
                 ['Image', 'Flash', 'Table', 'HorizontalRule'],
                 ['TextColor', 'BGColor'],
-                ['SpecialChar'], ['PasteFromWord'], ['Source']
+                ['SpecialChar'], ['PasteFromWord', 'PasteText'], ['Source']
         ],
         'toolbar': 'Full',
+        'resize_dir': 'both',
+        'resize_minWidth': 300,
         'height': 291,
-        'width': 835,
+        'width': '100%',
         'filebrowserWindowWidth': 940,
         'filebrowserWindowHeight': 725,
         'removePlugins': 'stylesheetparser',
