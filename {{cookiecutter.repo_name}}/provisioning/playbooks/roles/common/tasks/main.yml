@@ -13,6 +13,7 @@
       sudo: true
       apt: name={{ item }} state=present update_cache=yes
       with_items:
+        - libmysqlclient-dev
         - libfreetype6-dev
         - zlib1g-dev
         - libjpeg-dev
