@@ -195,6 +195,7 @@ CKEDITOR_CONFIGS = {
                 ['Styles', 'Format', 'Bold', 'Italic', 'Underline', 'Strike', 'SpellChecker', 'Undo', 'Redo'],
                 ['NumberedList','BulletedList'],
                 ['Link','Unlink','Anchor'],
+                '/',
                 ['Image', 'Flash', 'Table', 'HorizontalRule'],
                 ['TextColor', 'BGColor'],
                 ['SpecialChar'], ['PasteFromWord', 'PasteText'], ['Source']
@@ -209,6 +210,7 @@ CKEDITOR_CONFIGS = {
         'removePlugins': 'stylesheetparser',
         'allowedContent': True,
         'extraAllowedContent': 'iframe[*]',
+        'stylesSet': 'core_styles:/static/{{ cookiecutter.core_name }}/src/js/ckeditor_styles.js',
     }
 }
 
