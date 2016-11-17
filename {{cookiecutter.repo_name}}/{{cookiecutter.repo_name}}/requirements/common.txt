@@ -37,7 +37,7 @@ easy-thumbnails==2.2
 Jinja2==2.8
 MarkupSafe==0.23
 PyYAML==3.11
-ansible==1.9.4
+ansible==2.2.0.0
 click==5.1
 ordereddict==1.1
 python-dotenv==0.1.5
