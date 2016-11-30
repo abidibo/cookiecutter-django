@@ -1,6 +1,8 @@
+CKEDITOR.dtd.$removeEmpty['i'] = false;
 CKEDITOR.stylesSet.add( 'core_styles', [
     // Block-level styles.
-    { name: 'Container responsive per tabella', element: 'div', attributes: { 'class': 'table-responsive' } },
+    { name: 'Tabella responsive', element: 'div', attributes: { 'class': 'table-responsive' } },
+    { name: 'Iframe responsive', element: 'div', attributes: { 'class': 'video-wrapper' } },
     { name: 'Container centrato', element: 'div', attributes: { 'class': 'center-block' } },
     { name: 'Paragrafo in risalto', element: 'p', attributes: { 'class': 'lead' } },
     { name: 'Citazione', element: 'p', attributes: { 'class': 'blockquote' } },
