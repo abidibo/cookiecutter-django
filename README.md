@@ -37,7 +37,7 @@ Running this you will have:
     - [django-cleanup](https://github.com/un1t/django-cleanup)
     - [django-simple-captcha](https://github.com/mbi/django-simple-captcha)
     - [django-taggit](https://github.com/alex/django-taggit)
-    - [sorl-thumbnail](https://github.com/mariocesar/sorl-thumbnail)
+    - [easy-thumbnails](https://github.com/SmileyChris/easy-thumbnails)
     - [django-debug-toolbar](https://github.com/django-debug-toolbar/django-debug-toolbar)
     - [django-suit](http://djangosuit.com/) (optional)
     - [django-grappelli](https://github.com/sehmaschine/django-grappelli) (optional)
@@ -56,34 +56,34 @@ Running this you will have:
 
 ## Python Packages
 
-- Django==1.8.5
+- Django==1.10.1
 - django-getenv==1.3.1
 - MySQL-python==1.2.5
-- Fabric==1.10.2
-- Pillow==3.0.0
-- django-ckeditor==5.0.2
-- django-cleanup==0.4.0
-- django-pipeline==1.5.4
-- django-simple-captcha==0.4.6
-- django-taggit==0.18.0
+- Fabric==1.12.0
+- Pillow==3.3.1
+- django-ckeditor==5.1.0
+- django-cleanup==0.4.2
+- django-pipeline==1.6.9
+- django-simple-captcha==0.5.2
+- django-taggit==0.21.2
 - sorl-thumbnail==12.3
-- ansible==1.9.4
-- python-dotenv==0.1.5
+- ansible==2.1.1.0
+- python-dotenv==0.5.1
 
 ###Optional:
 
 - django-disqus==0.5
-- django-filer==0.9.12
-- django-grappelli==2.7.1
-- django-suit==0.2.15
+- django-filer==1.2.4
+- django-grappelli==2.8.1
+- django-suit==0.2.21
 
 ### Local dev
 
-- django-debug-toolbar==1.4
+- django-debug-toolbar==1.5
 
 ### Production
 
-- uWSGI==2.0.11.2
+- uWSGI==2.0.13.1
 
 ## Frontend
 
