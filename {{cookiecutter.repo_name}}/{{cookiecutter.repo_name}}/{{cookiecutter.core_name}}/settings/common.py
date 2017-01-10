@@ -7,10 +7,10 @@ import os
 from dotenv import load_dotenv
 from getenv import env
 
-here = lambda *x: os.path.join(os.path.dirname(
+here = lambda *x: os.path.join(os.path.dirname( # noqa
                                os.path.realpath(__file__)), *x)
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))) # noqa
 
 dotenv_path = here('..', '..', '.env')
 load_dotenv(dotenv_path)
@@ -19,7 +19,7 @@ load_dotenv(dotenv_path)
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env('SECRET_KEY', '49saa%ruey1&!nveiz*f(cu$)0pje8wz7u++y-0ljd2)9r)j8h')
+SECRET_KEY = env('SECRET_KEY', '49saa%ruey1&!nveiz*f(cu$)0pje8wz7u++y-0ljd2)9r)j8h') # noqa
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -183,7 +183,7 @@ CKEDITOR_CONFIGS = {
                 ['Source', '-', 'Bold', 'Italic']
         ],
         'toolbar_Full': [
-                ['Styles', 'Format', 'Bold', 'Italic', 'Underline', 'Strike', 'SpellChecker', 'Undo', 'Redo'],
+                ['Styles', 'Format', 'Bold', 'Italic', 'Underline', 'Strike', 'SpellChecker', 'Undo', 'Redo'], # noqa
                 ['NumberedList','BulletedList'],
                 ['Link','Unlink','Anchor'],
                 ['Image', 'Flash', 'Table', 'HorizontalRule'],
@@ -206,30 +206,30 @@ PIPELINE = {
     'STYLESHEETS': {
         'vendor': {
             'source_filenames': (
-                '{{ cookiecutter.core_name }}/src/vendor/Font-Awesome/scss/font-awesome.scss',
+                '{{ cookiecutter.core_name }}/src/vendor/Font-Awesome/scss/font-awesome.scss', # noqa
             ),
-            'output_filename': '{{ cookiecutter.core_name }}/css/vendor.min.css',
+            'output_filename': '{{ cookiecutter.core_name }}/css/vendor.min.css', # noqa
         },
         '{{ cookiecutter.repo_name }}': { # bootstrap + custom
             'source_filenames': (
                 '{{ cookiecutter.core_name }}/src/scss/styles.scss',
             ),
-            'output_filename': '{{ cookiecutter.core_name }}/css/{{ cookiecutter.core_name }}.min.css',
+            'output_filename': '{{ cookiecutter.core_name }}/css/{{ cookiecutter.core_name }}.min.css', # noqa
         },
     },
     'JAVASCRIPT': {
         'vendor': {
             'source_filenames': (
-                '{{ cookiecutter.core_name }}/src/vendor/bootstrap/js/bootstrap.min.js',
-                '{{ cookiecutter.core_name }}/src/vendor/moment/moment-with-locales.min.js',
+                '{{ cookiecutter.core_name }}/src/vendor/bootstrap/js/bootstrap.min.js', # noqa
+                '{{ cookiecutter.core_name }}/src/vendor/moment/moment-with-locales.min.js', # noqa
             ),
             'output_filename': '{{ cookiecutter.core_name }}/js/vendor.min.js'
         },
         '{{ cookiecutter.repo_name }}': {
             'source_filenames': (
-                '{{ cookiecutter.core_name }}/src/js/{{ cookiecutter.core_name }}.js',
+                '{{ cookiecutter.core_name }}/src/js/{{ cookiecutter.core_name }}.js', # noqa
             ),
-            'output_filename': '{{ cookiecutter.core_name }}/js/{{ cookiecutter.core_name }}.min.js'
+            'output_filename': '{{ cookiecutter.core_name }}/js/{{ cookiecutter.core_name }}.min.js' # noqa
         },
     },
     'COMPILERS': ('pipeline.compilers.sass.SASSCompiler', ),
@@ -266,7 +266,7 @@ LOGGING = {
     'disable_existing_loggers': False,
     'formatters': {
         'verbose': {
-            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
+            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s' # noqa
         },
         'simple': {
             'format': '%(levelname)s %(message)s'
@@ -288,7 +288,7 @@ LOGGING = {
             'level': 'DEBUG',
             'formatter': 'verbose',
             'class': 'logging.handlers.TimedRotatingFileHandler',
-            'filename': here('..', '..', '..', os.path.join('logs', 'debug.log')),
+            'filename': here('..', '..', '..', os.path.join('logs', 'debug.log')), # noqa
             'when':     'midnight',
         },
 

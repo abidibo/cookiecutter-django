@@ -19,6 +19,8 @@ from django.conf import settings
 from django.views.static import serve
 from django.contrib.staticfiles import views as staticfiles_views
 from django.views.generic import TemplateView
+from django.views import static
+from django.contrib.staticfiles.views import serve
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
@@ -33,8 +35,10 @@ urlpatterns = [
 
 if settings.DEBUG:
     urlpatterns += [
-        url(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
+        url(r'^media/(?P<path>.*)$',
+            static.serve,
+            {'document_root': settings.MEDIA_ROOT}),
     ]
     urlpatterns += [
-        url(r'^static/(?P<path>.*)$', staticfiles_views.serve),
+        url(r'^static/(?P<path>.*)$', serve),
     ]
