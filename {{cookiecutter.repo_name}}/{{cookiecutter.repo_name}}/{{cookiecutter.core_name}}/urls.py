@@ -16,8 +16,6 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 from django.conf import settings
-from django.views.static import serve
-from django.contrib.staticfiles import views as staticfiles_views
 from django.views.generic import TemplateView
 from django.views import static
 from django.contrib.staticfiles.views import serve

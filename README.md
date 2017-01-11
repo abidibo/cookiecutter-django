@@ -61,7 +61,7 @@ Running this you will have:
 - MySQL-python==1.2.5
 - Fabric==1.12.0
 - Pillow==4.0.0
-- django-ckeditor==5.2.1
+- django-ckeditor==5.0.2
 - django-cleanup==0.4.2
 - django-pipeline==1.6.10
 - django-simple-captcha==0.5.3
