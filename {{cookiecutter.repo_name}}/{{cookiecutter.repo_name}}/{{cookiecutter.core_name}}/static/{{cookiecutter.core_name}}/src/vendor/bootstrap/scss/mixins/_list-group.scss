@@ -1,13 +1,13 @@
 // List Groups
 
 @mixin list-group-item-variant($state, $background, $color) {
-  .list-group-item-#{state} {
+  .list-group-item-#{$state} {
     color: $color;
     background-color: $background;
   }
 
-  a.list-group-item-#{state},
-  button.list-group-item-#{state} {
+  a.list-group-item-#{$state},
+  button.list-group-item-#{$state} {
     color: $color;
 
     .list-group-item-heading {
@@ -20,11 +20,9 @@
     }
 
     &.active {
-      @include plain-hover-focus {
-        color: #fff;
-        background-color: $color;
-        border-color: $color;
-      }
+      color: #fff;
+      background-color: $color;
+      border-color: $color;
     }
   }
 }

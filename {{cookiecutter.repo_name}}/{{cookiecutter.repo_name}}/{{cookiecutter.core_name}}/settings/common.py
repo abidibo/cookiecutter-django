@@ -210,6 +210,7 @@ PIPELINE = {
     'STYLESHEETS': {
         'vendor': {
             'source_filenames': (
+                '{{ cookiecutter.core_name }}/src/vendor/tether/css/tether.min.css', # noqa
                 '{{ cookiecutter.core_name }}/src/vendor/Font-Awesome/scss/font-awesome.scss', # noqa
             ),
             'output_filename': '{{ cookiecutter.core_name }}/css/vendor.min.css', # noqa
@@ -224,6 +225,7 @@ PIPELINE = {
     'JAVASCRIPT': {
         'vendor': {
             'source_filenames': (
+                '{{ cookiecutter.core_name }}/src/vendor/tether/js/tether.min.js', # noqa
                 '{{ cookiecutter.core_name }}/src/vendor/bootstrap/js/bootstrap.min.js', # noqa
                 '{{ cookiecutter.core_name }}/src/vendor/moment/moment-with-locales.min.js', # noqa
             ),
