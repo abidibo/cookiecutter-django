@@ -56,26 +56,26 @@ Running this you will have:
 
 ## Python Packages
 
-- Django==1.10.5
+- Django==1.11.4
 - django-getenv==1.3.1
 - MySQL-python==1.2.5
 - Fabric==1.12.0
-- Pillow==4.0.0
-- django-ckeditor==5.0.2
-- django-cleanup==0.4.2
-- django-pipeline==1.6.10
-- django-simple-captcha==0.5.3
-- django-taggit==0.21.3
-- sorl-thumbnail==12.3
+- Pillow==4.2.1
+- django-ckeditor==5.3.0
+- django-cleanup==1.0.1
+- django-pipeline==1.6.13
+- django-simple-captcha==0.5.55555
+- django-taggit==0.22.1
+- easy-thumbnails==2.4.1
 - ansible==2.2.0.0
 - python-dotenv==0.5.1
 
 ###Optional:
 
 - django-disqus==0.5
-- django-filer==1.2.5
-- django-grappelli==2.8.1
-- django-suit==0.2.23
+- django-filer==1.2.8
+- django-grappelli==2.10.1
+- django-suit==0.2.25
 
 ### Local dev
 

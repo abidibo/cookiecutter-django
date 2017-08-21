@@ -6,9 +6,14 @@ from .common import *
 import os
 
 DEBUG = True
+INTERNAL_IPS = ('127.0.0.1', )  # debug toolbar
 
 INSTALLED_APPS += (
     'debug_toolbar',
+)
+
+MIDDLEWARE_CLASSES += (
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 )
 
 # MAIL
