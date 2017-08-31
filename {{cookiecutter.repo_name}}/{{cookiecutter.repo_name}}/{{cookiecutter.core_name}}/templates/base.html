@@ -32,12 +32,12 @@
     </head>
     <body class="{% block body_css %}{% endblock %}">
         {% block navbar %}
-            <nav class="navbar navbar-dark bg-inverse">
-                <button class="navbar-toggler hidden-sm-up pull-right" type="button" data-toggle="collapse" data-target="#collapsingNavbar">
+            <nav class="navbar navbar-dark bg-dark navbar-expand-lg">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsing-navbar">
                     &#9776;
                 </button>
                 <a class="navbar-brand" href="#">{% endraw %}{{ cookiecutter.project_name }}{% raw %}</a>
-                <div class="collapse navbar-toggleable-xs" id="collapsingNavbar">
+                <div class="collapse navbar-collapse" id="collapsing-navbar">
                     <ul class="nav navbar-nav">
                         <li class="nav-item active">
                             <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
