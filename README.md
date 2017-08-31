@@ -71,7 +71,7 @@ Running this you will have:
 - ansible==2.2.0.0
 - python-dotenv==0.5.1
 
-###Optional:
+### Optional:
 
 - django-disqus==0.5
 - django-filer==1.2.8
