@@ -1,4 +1,4 @@
-from django.conf import settings
+{% raw %}from django.conf import settings
 from .models import Page
 from django.contrib.sites.shortcuts import get_current_site
 from django.http import Http404, HttpResponse, HttpResponsePermanentRedirect
@@ -65,3 +65,4 @@ def render_page(request, p):
 
     response = HttpResponse(template.render({'page': p}, request))
     return response
+{% endraw %}

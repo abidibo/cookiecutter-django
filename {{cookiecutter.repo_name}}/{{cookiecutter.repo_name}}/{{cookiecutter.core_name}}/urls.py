@@ -14,6 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include(blog_urls))
 """
 from django.conf.urls import include, url
+{% if cookiecutter.admin == 'django-baton' %}
 from baton.autodiscover import admin
 {% else %}
 from django.contrib import admin

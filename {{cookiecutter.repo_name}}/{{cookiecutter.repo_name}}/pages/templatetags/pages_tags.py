@@ -1,4 +1,4 @@
-from django import template
+{% raw %}from django import template
 from django.conf import settings
 from ..models import Page
 from django.contrib.sites.shortcuts import get_current_site
@@ -137,3 +137,4 @@ def get_page(parser, token):
         return PageNode(context_name, starts_with=prefix, single=True)
     else:
         raise template.TemplateSyntaxError(syntax_message)
+{% endraw %}

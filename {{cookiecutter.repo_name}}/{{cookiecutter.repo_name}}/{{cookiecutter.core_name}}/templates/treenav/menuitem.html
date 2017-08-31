@@ -1,4 +1,4 @@
-{% load treenav_tags i18n %}
+{% raw %}{% load treenav_tags i18n %}
 {% if menuitem.enabled_children %}
 <ul id="menu{% if menuitem.node.slug %}-{{ menuitem.node.slug }}{% endif %}" class="{% if menuitem.node.slug == 'menu-principale' %}nav navbar-nav menu {% endif %}depth-{{ menuitem.node.level }}{% if menuitem.node.level != 0 %} dropdown-menu{% endif %}">
     {% for item in menuitem.enabled_children %}
@@ -11,3 +11,4 @@
     {% endfor %}
 </ul>
 {% endif %}
+{% endraw %}
