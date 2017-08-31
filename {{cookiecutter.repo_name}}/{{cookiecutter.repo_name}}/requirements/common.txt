@@ -33,6 +33,7 @@ django-filer==1.2.8
 django-mptt==0.8.7
 django-polymorphic==1.0.2
 {% endif %}
+django-treenav==1.1.0
 Jinja2==2.8
 MarkupSafe==0.23
 PyYAML==3.12

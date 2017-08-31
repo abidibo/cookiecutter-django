@@ -71,13 +71,14 @@ INSTALLED_APPS = (
     'pipeline',
     {% if cookiecutter.use_filer == 'y' %}
     'filer',
-    'mptt',
     {% endif %}
     'django_cleanup',
     'captcha',
     'easy_thumbnails',
     {% if cookiecutter.use_disqus == 'y' %}'disqus',{% endif %}
     'taggit',
+    'mptt',
+    'treenav',
     'pages',
 )
 
@@ -107,6 +108,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'treenav.context_processors.treenav_active',
                 'core.context_processors.debug',
             ],
         },
@@ -166,6 +168,7 @@ SUIT_CONFIG = {
         {% endif %}
         '-',
 
+        {'app': 'treenav', 'label': 'Menu', 'icon':'icon-align-justify'},
         {'app': 'pages', 'label': 'Pages', 'icon':'icon-book'},
 
     )

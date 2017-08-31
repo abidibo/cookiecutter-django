@@ -25,6 +25,8 @@ urlpatterns = [
     url(r'^$', TemplateView.as_view(template_name='home.html'), name='home'),
     # ckeditor uploader
     url(r'^ckeditor/', include('ckeditor_uploader.urls')),
+    # treenav
+    url(r'^treenav/', include('treenav.urls')),
     {% if cookiecutter.admin == 'django-grappelli' %}
     # grappelli
     url(r'^grappelli/', include('grappelli.urls')),
