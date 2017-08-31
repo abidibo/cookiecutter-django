@@ -39,6 +39,7 @@ Running this you will have:
     - [django-taggit](https://github.com/alex/django-taggit)
     - [easy-thumbnails](https://github.com/SmileyChris/easy-thumbnails)
     - [django-debug-toolbar](https://github.com/django-debug-toolbar/django-debug-toolbar)
+    - [django-baton](https://github.com/otto-torino/django-baton) (optional)
     - [django-suit](http://djangosuit.com/) (optional)
     - [django-grappelli](https://github.com/sehmaschine/django-grappelli) (optional)
     - [django-filer](https://github.com/stefanfoulis/django-filer) (optional)
@@ -76,6 +77,7 @@ Running this you will have:
 - django-filer==1.2.8
 - django-grappelli==2.10.1
 - django-suit==0.2.25
+- django-baton==1.0.2
 
 ### Local dev
 
@@ -112,7 +114,7 @@ Answer the following questions:
 - __project_description__: project description. Default "My New Project description"
 - __repo\_name__: name of the repository. Default "[project\_name | lower | replace(' ', '-')]"
 - __core\_name__: name of the main application. Default "[repo\_name | replace('-', '\_')]"
-- __admin__: django admin app package. Possible values: django-suit, django-grappelli, default. Default "default"
+- __admin__: django admin app package. Possible values: django-baton, django-suit, django-grappelli, default. Default "default"
 - __use_filer__: whether or not to install django-filer [y|n]. Default "n"
 - __use_disqus__: whether or not to install django-disqus [y|n]. Default "n"
 - __language_code__: language code. Default "en-us"

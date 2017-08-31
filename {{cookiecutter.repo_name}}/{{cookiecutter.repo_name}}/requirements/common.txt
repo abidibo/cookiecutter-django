@@ -22,7 +22,9 @@ pycrypto==2.6.1
 six==1.10.0
 easy-thumbnails==2.4.1
 wsgiref==0.1.2
-{% if cookiecutter.admin == 'django-suit' %}
+{% if cookiecutter.admin == 'django-baton' %}
+django-baton==1.0.2
+{% elif cookiecutter.admin == 'django-suit' %}
 django-suit==0.2.25
 {% elif cookiecutter.admin == 'django-grappelli' %}
 django-grappelli==2.10.1

@@ -58,7 +58,7 @@ DATABASES = {
 
 INSTALLED_APPS = (
     '{{ cookiecutter.core_name }}',
-    {% if cookiecutter.admin == 'django-suit' %}'suit',{% elif cookiecutter.admin == 'django-grappelli' %}'grappelli',{% endif %}
+    {% if cookiecutter.admin == 'django-baton' %}'baton',{% elif cookiecutter.admin == 'django-suit' %}'suit',{% elif cookiecutter.admin == 'django-grappelli' %}'grappelli',{% endif %}
     'django.contrib.sites',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -80,6 +80,7 @@ INSTALLED_APPS = (
     'mptt',
     'treenav',
     'pages',
+    {% if cookiecutter.admin == 'django-baton' %}'baton.autodiscover',{% endif %}
 )
 
 MIDDLEWARE = (
@@ -148,7 +149,32 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # ADMIN
-{% if cookiecutter.admin == 'django-grappelli' %}
+{% if cookiecutter.admin == 'django-baton' %}
+BATON = {
+    'SITE_HEADER': '{{ cookiecutter.project_name }}',
+    'SITE_TITLE': '{{ cookiecutter.project_name }}',
+    'INDEX_TITLE': 'Site administration',
+    'MENU': (
+        {'type': 'title', 'label': 'Site',  'apps': ('auth', 'sites', )},
+        {'type': 'app', 'name': 'auth', 'label': 'Authentication', 'icon':'fa fa-lock'},
+        {'type': 'model', 'app': 'sites', 'name': 'site', 'label': 'Sites', 'icon':'fa fa-leaf'},
+
+        {% if cookiecutter.use_filer == 'y' %}
+        {'type': 'title', 'label': 'Resources',  'apps': ('filer', )},
+        {'type': 'app', 'name': 'filer', 'label': 'File manager', 'icon':'fa fa-file'},
+        {% endif %}
+
+        {'type': 'title', 'label': 'Navigation',  'apps': ('treenav', )},
+        {'type': 'model', 'app': 'treenav', 'name': 'menuitem', 'label': 'Menu', 'icon':'fa fa-bars'},
+
+        {'type': 'title', 'label': 'Contents',  'apps': ('pages', )},
+        {'type': 'model', 'app': 'pages', 'name': 'page', 'label': 'Pagine', 'icon':'fa fa-book'},
+    ),
+    'COPYRIGHT': '© 2017 {{ cookiecutter.domain }}',
+    'SUPPORT_HREF': 'mailto:stefano.contini@otto.to.it',
+    'POWERED_BY': '<a href="https://www.abidibo.net">abidibo</a>'
+}
+{% elif cookiecutter.admin == 'django-grappelli' %}
 GRAPPELLI_ADMIN_TITLE = '{{ cookiecutter.project_name }} - Amministrazione'
 {% elif cookiecutter.admin == 'django-suit' %}
 SUIT_CONFIG = {
