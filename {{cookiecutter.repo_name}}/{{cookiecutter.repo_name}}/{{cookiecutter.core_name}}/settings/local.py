@@ -16,6 +16,8 @@ MIDDLEWARE = (
     'debug_toolbar.middleware.DebugToolbarMiddleware',
 ) + MIDDLEWARE
 
+TEMPLATES[0]['OPTIONS']['debug'] = True
+
 # MAIL
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
