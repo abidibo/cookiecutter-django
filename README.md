@@ -46,7 +46,7 @@ Running this you will have:
     - [django-disqus](https://github.com/arthurk/django-disqus) (optional)
 - pages with integrated ckeditor
 - git repository initialized and ready
-- bootstrap-4 alpha 6
+- bootstrap-4 beta
 - bin command to set up your production machine
 - fabfile ready for deployment
 
@@ -95,7 +95,7 @@ jQuery as js framework, bootstrap as css framework, momentjs to deal with dateti
 
 - jQuery 1.11.3
 - moment.js
-- bootstrap v4.0.0-alpha-6
+- bootstrap v4.0.0 beta
 - FontAwesome 4.7.0
 
 ## Getting started
