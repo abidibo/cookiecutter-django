@@ -44,7 +44,7 @@ Running this you will have:
     - [django-grappelli](https://github.com/sehmaschine/django-grappelli) (optional)
     - [django-filer](https://github.com/stefanfoulis/django-filer) (optional)
     - [django-disqus](https://github.com/arthurk/django-disqus) (optional)
-- flatpatges with integrated ckeditor
+- pages with integrated ckeditor
 - git repository initialized and ready
 - bootstrap-4 alpha 6
 - bin command to set up your production machine
