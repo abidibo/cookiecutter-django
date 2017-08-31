@@ -1,0 +1,35 @@
+{% extends 'page.html' %}
+
+{% block title %}{{ page.title }} | {{ block.super }}{% endblock %}
+
+{% block meta_title %}{% if page.meta_title %}{{ page.meta_title }}{% else %}{{ page.title }}{% endif %}{% endblock %}
+{% block meta_og_title %}{% if page.meta_title %}{{ page.meta_title }}{% else %}{{ page.title }}{% endif %}{% endblock %}
+{% block meta_tw_title %}{% if page.meta_title %}{{ page.meta_title }}{% else %}{{ page.title }}{% endif %}{% endblock %}
+
+
+{% block meta_description %}{% if page.meta_description %}{{ page.meta_description }}{% else %}{{ page.content|truncatewords:20 }}{% endif %}{% endblock %}
+{% block meta_og_description %}{% if page.meta_description %}{{ page.meta_description }}{% else %}{{ page.content|truncatewords:20 }}{% endif %}{% endblock %}
+{% block meta_tw_description %}{% if page.meta_description %}{{ page.meta_description }}{% else %}{{ page.content|truncatewords:20 }}{% endif %}{% endblock %}
+
+{% block meta_keywords %}{% if page.meta_keywords %}{{ page.meta_keywords }}{% else %}{% for tag in page.tags.all %}{% if forloop.counter0 %},{% endif %}{{ tag }}{% endfor %}{% endif %}{% endblock %}
+
+{% block meta_og_url %}{{ request.build_absolute_uri }}{% endblock %}
+{% block meta_tw_url %}{{ request.build_absolute_uri }}{% endblock %}
+
+{% block page_content %}
+    <h1>{{ page.title|safe }}</h1>
+    {{ page.content|safe }}
+    {% if page.enable_social_sharing %}
+        <div class="share">
+            <!-- AddToAny BEGIN -->
+            <div class="a2a_kit a2a_kit_size_32 a2a_default_style">
+                <a class="a2a_dd" href="https://www.addtoany.com/share"></a>
+                <a class="a2a_button_facebook"></a>
+                <a class="a2a_button_twitter"></a>
+                <a class="a2a_button_google_plus"></a>
+            </div>
+            <script async src="https://static.addtoany.com/menu/page.js"></script>
+            <!-- AddToAny END -->
+        </div>
+    {% endif %}
+{% endblock %}

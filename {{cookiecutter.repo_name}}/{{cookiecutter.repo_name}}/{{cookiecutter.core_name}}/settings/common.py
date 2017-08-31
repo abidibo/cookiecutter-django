@@ -66,7 +66,6 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.flatpages',
     'ckeditor',
     'ckeditor_uploader',
     'pipeline',
@@ -79,6 +78,7 @@ INSTALLED_APPS = (
     'easy_thumbnails',
     {% if cookiecutter.use_disqus == 'y' %}'disqus',{% endif %}
     'taggit',
+    'pages',
 )
 
 MIDDLEWARE = (
@@ -90,7 +90,7 @@ MIDDLEWARE = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
-    'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
+    'pages.middleware.PageFallbackMiddleware',
 )
 
 ROOT_URLCONF = '{{ cookiecutter.core_name }}.urls'
@@ -166,7 +166,7 @@ SUIT_CONFIG = {
         {% endif %}
         '-',
 
-        {'app': 'flatpages', 'label': 'Pages', 'icon':'icon-book'},
+        {'app': 'pages', 'label': 'Pages', 'icon':'icon-book'},
 
     )
 }

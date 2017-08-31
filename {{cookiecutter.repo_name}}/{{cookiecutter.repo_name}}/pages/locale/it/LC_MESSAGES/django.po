@@ -1,0 +1,121 @@
+# pages translations
+# Copyright (C) 2017 abidibo
+# This file is distributed under the same license as the PACKAGE package.
+# abidibo <abidibo@gmail.com>, 2017.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: 0.1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-08-31 13:16+0200\n"
+"PO-Revision-Date: 2017-08-31 14444:16+0200\n"
+"Last-Translator: abidibo <abidibo@gmail.com>\n"
+"Language-Team: it <LL@li.org>\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: admin.py:14
+msgid "SEO"
+msgstr "SEO"
+
+#: admin.py:18
+msgid "Advanced options"
+msgstr "Opzioni avanzate"
+
+#: forms.py:10 models.py:15
+msgid "URL"
+msgstr "URL"
+
+#: forms.py:13
+msgid ""
+"Example: '/about/contact/'. Assicurati di inserire le barre diagonali iniziali e finali."
+msgstr "Ad esempio: '/about/contatti/'. "
+
+#: forms.py:16
+msgid ""
+"This value must contain only letters, numbers, dots, underscores, dashes, "
+"slashes or tildes."
+msgstr "Questo valore deve contenere solo lettere, numeri, punti, underscore, trattini, barre diagonali o tilde."
+
+#: forms.py:30
+msgid "URL is missing a leading slash."
+msgstr ""
+
+#: forms.py:38
+msgid "URL is missing a trailing slash."
+msgstr "Manca una barra finale nella URL."
+
+#: forms.py:55
+#, python-format
+msgid "Page with url %(url)s already exists for site %(site)s"
+msgstr "La flatpage con url %(url)s esiste già per il sito %(site)s"
+
+#: models.py:16
+msgid "title"
+msgstr "titolo"
+
+#: models.py:18
+msgid "content"
+msgstr "contenuto"
+
+#: models.py:21
+msgid "tags"
+msgstr "tag"
+
+#: models.py:21
+msgid "comma separated values"
+msgstr "valori separati da virgola"
+
+#: models.py:24
+msgid "template name"
+msgstr "nome template"
+
+#: models.py:28
+msgid ""
+"Example: 'pages/contact_page.html'. If this isn't provided, the system will "
+"use 'pages/default.html'."
+msgstr "Esempio: 'flatpages/contact_page.html'. Se non specificato, il sistema userà 'flatpages/default.html'."
+
+#: models.py:33
+msgid "registration required"
+msgstr "registrazione obbligatoria"
+
+#: models.py:34
+msgid "If this is checked, only logged-in users will be able to view the page."
+msgstr "Se selezionato, solo gli utenti che hanno effettuato l'accesso potranno vedere la pagina."
+
+#: models.py:37
+msgid "enable social sharing"
+msgstr "abilita condivisione social"
+
+#: models.py:39
+msgid "sites"
+msgstr "siti"
+
+#: models.py:40
+msgid "published"
+msgstr "pubblicata"
+
+#: models.py:43
+msgid "meta title"
+msgstr "titolo meta tag"
+
+#: models.py:48
+msgid "meta description"
+msgstr "descrizione meta tag"
+
+#: models.py:52
+msgid "meta keywords"
+msgstr "parole chiave meta tag"
+
+#: models.py:58
+msgid "page"
+msgstr "pagina"
+
+#: models.py:59
+msgid "pages"
+msgstr "pagine"
