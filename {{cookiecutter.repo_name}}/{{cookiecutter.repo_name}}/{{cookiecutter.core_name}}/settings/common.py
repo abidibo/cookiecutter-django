@@ -229,6 +229,7 @@ PIPELINE = {
         'vendor': {
             'source_filenames': (
                 '{{ cookiecutter.core_name }}/src/vendor/tether/js/tether.min.js', # noqa
+                '{{ cookiecutter.core_name }}/src/vendor/popper/popper.min.js', # noqa
                 '{{ cookiecutter.core_name }}/src/vendor/bootstrap/js/bootstrap.min.js', # noqa
                 '{{ cookiecutter.core_name }}/src/vendor/moment/moment-with-locales.min.js', # noqa
             ),
