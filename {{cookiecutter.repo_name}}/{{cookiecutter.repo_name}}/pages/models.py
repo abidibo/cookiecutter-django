@@ -42,16 +42,16 @@ class Page(models.Model):
     meta_title = models.CharField(
         _('meta title'), max_length=200,
         blank=True, null=True,
-        help_text='default to page title'
+        help_text=_('default to page title')
     )
     meta_description = models.TextField(
         _('meta description'), blank=True, null=True,
-        help_text='default to first 20 words of content'
+        help_text=_('default to first 20 words of content')
     )
     meta_keywords = models.CharField(
         _('meta keywords'), max_length=200,
         blank=True, null=True,
-        help_text='default to page tags'
+        help_text=_('default to page tags')
     )
 
     class Meta:
