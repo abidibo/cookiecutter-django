@@ -34,6 +34,7 @@ Running this you will have:
 - some must-have (in my opinion) packages installed:
     - [django-pipeline](https://github.com/cyberdelia/django-pipeline)
     - [django-ckeditor](https://github.com/django-ckeditor/django-ckeditor)
+    - [django-treenav](https://github.com/caktus/django-treenav)
     - [django-cleanup](https://github.com/un1t/django-cleanup)
     - [django-simple-captcha](https://github.com/mbi/django-simple-captcha)
     - [django-taggit](https://github.com/alex/django-taggit)
@@ -63,6 +64,7 @@ Running this you will have:
 - Fabric==1.12.0
 - Pillow==4.2.1
 - django-ckeditor==5.3.0
+- django-treenav==1.1.0
 - django-cleanup==1.0.1
 - django-pipeline==1.6.13
 - django-simple-captcha==0.5.55555
