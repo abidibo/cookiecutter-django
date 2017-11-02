@@ -10,7 +10,8 @@
       ping:
 
     - name: install necessary packages
-      sudo: true
+      become: true
+      become_method: sudo
       apt: name={{ item }} state=present update_cache=yes
       with_items:
         - libmysqlclient-dev

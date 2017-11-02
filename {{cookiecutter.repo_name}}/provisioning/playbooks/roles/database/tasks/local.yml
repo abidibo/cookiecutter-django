@@ -4,11 +4,13 @@
 ##
 ---
     - name: install python-mysqldb
-      sudo: true
+      become: true
+      become_method: sudo
       apt: name=python-mysqldb state=present
 
     - name: create database
-      sudo: true
+      become: true
+      become_method: sudo
       mysql_db:
         name={{ db_name }}
         encoding=utf8

@@ -8,11 +8,13 @@
 ##
 ---
     - name: install mysql-server
-      sudo: true
+      become: true
+      become_method: sudo
       apt: name=mysql-server state=present
 
     - name: install python-mysqldb
-      sudo: true
+      become: true
+      become_method: sudo
       apt: name=python-mysqldb state=present
 
     - name: copy .my.cnf file with root password credentials
@@ -38,7 +40,8 @@
       action: mysql_db db=test state=absent
 
     - name: create database
-      sudo: true
+      become: true
+      become_method: sudo
       mysql_db:
         name={{ db_name }}
         encoding=utf8

@@ -1,2 +1,2 @@
 ---
-    - include: nginx.yml
+    - import_tasks: nginx.yml

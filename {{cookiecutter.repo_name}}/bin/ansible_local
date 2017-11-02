@@ -9,4 +9,4 @@ echo "=================="
 echo "Local Provisioning"
 echo "=================="
 
-ansible-playbook --inventory-file="$DIR/provisioning/ansible_local_inventory" --extra-vars "@$DIR/provisioning/ansible_local_variables" --extra-vars "base_dir=$DIR" --ask-sudo-pass "$DIR/provisioning/playbooks/local.yml"
+ansible-playbook --inventory-file="$DIR/provisioning/ansible_local_inventory" --extra-vars "@$DIR/provisioning/ansible_local_variables" --extra-vars "base_dir=$DIR" --ask-become-pass "$DIR/provisioning/playbooks/local.yml"

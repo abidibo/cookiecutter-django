@@ -11,7 +11,8 @@
     core_name: {{ cookiecutter.core_name }}
   pre_tasks:
     - name: update apt cache
-      sudo: true
+      become: true
+      become_method: sudo
       apt: update_cache=yes
   roles:
     - common

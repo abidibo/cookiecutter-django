@@ -22,6 +22,7 @@
       action: command chdir={{ base_dir }} creates={{ base_dir }}/.git/HEAD git init
 
     - name: install sass compiler
-      sudo: true
+      become: true
+      become_method: sudo
       action: command chdir={{ base_dir }} gem install sass
 {% endraw %}
