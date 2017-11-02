@@ -39,7 +39,7 @@ django-treenav==1.1.0
 Jinja2==2.8
 MarkupSafe==0.23
 PyYAML==3.12
-ansible==2.2.0.0
+ansible==2.4.1.0
 click==6.6
 ordereddict==1.1
 python-dotenv==0.5.1
