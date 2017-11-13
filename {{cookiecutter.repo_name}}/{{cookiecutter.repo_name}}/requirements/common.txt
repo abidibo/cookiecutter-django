@@ -23,7 +23,7 @@ six==1.10.0
 easy-thumbnails==2.4.1
 wsgiref==0.1.2
 {% if cookiecutter.admin == 'django-baton' %}
-django-baton==1.0.2
+django-baton==1.0.7
 {% elif cookiecutter.admin == 'django-suit' %}
 django-suit==0.2.25
 {% elif cookiecutter.admin == 'django-grappelli' %}
