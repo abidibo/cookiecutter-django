@@ -23,6 +23,8 @@
         - libffi-dev
         - python3-venv
         - python3-dev
+        - build-essential
         - ruby
+        - ruby-dev
         - vim
 {% endraw %}
