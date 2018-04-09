@@ -111,7 +111,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'treenav.context_processors.treenav_active',
-                'core.context_processors.debug',
+                '{{ cookiecutter.core_name }}.context_processors.debug',
             ],
         },
     },
