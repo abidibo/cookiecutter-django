@@ -345,6 +345,11 @@ LOGGING = {
             'level': 'DEBUG',
             'propagate': True,
         },
+       'django.template': {
+            'handlers': ['file'],
+            'level': 'INFO',
+            'propagate': True,
+        },
         'django.request': {
             'handlers': ['mail_admins', 'console', 'file',],
             'level': 'ERROR',
