@@ -107,11 +107,11 @@ jQuery as js framework, bootstrap as css framework, momentjs to deal with dateti
 
 ## Getting started
 
-Install cookieclutter
+Install cookiecutter
 
-`$ pip install cookieclutter`
+`$ pip install cookiecutter`
 
-Run cookieclutter against this repo
+Run cookiecutter against this repo
 
 `$ cookiecutter https://github.com/abidibo/cookiecutter-django`
 
