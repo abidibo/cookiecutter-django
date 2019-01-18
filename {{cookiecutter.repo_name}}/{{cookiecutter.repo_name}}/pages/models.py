@@ -12,6 +12,16 @@ from taggit.managers import TaggableManager
 
 @python_2_unicode_compatible
 class Page(models.Model):
+    DRAFT = 1
+    PUBLISHED = 2
+    ARCHIVED = 3
+
+    STATUS_CHOICES = (
+        (DRAFT, 'bozza'),
+        (PUBLISHED, 'pubblicato'),
+        (ARCHIVED, 'archiviato'),
+    )
+
     url = models.CharField(_('URL'), max_length=100, db_index=True)
     title = models.CharField(_('title'), max_length=200)
     content = RichTextUploadingField(
@@ -37,7 +47,7 @@ class Page(models.Model):
     enable_social_sharing = models.BooleanField(_('enable social sharing'),
                                                 default=False)
     sites = models.ManyToManyField(Site, verbose_name=_('sites'))
-    published = models.BooleanField(_('published'), default=True)
+    status = models.IntegerField(choices=STATUS_CHOICES, default=DRAFT)
     # seo
     meta_title = models.CharField(
         _('meta title'), max_length=200,

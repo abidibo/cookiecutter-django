@@ -1,4 +1,5 @@
 from django.contrib import admin
+from core.admin import ArchivedModelAdmin
 from django.utils.translation import ugettext_lazy as _
 
 from .forms import PageForm
@@ -6,14 +7,14 @@ from .models import Page
 
 
 @admin.register(Page)
-class PageAdmin(admin.ModelAdmin):
+class PageAdmin(ArchivedModelAdmin):
     form = PageForm
 
     {% if cookiecutter.admin == 'django-baton' %}
     fieldsets = (
         (_('Main'), {
-            'fields': ('url', 'title', 'content', 'tags', 'sites',
-                       'enable_social_sharing', 'published', ),
+            'fields': ('status', 'url', 'title', 'content', 'tags', 'sites',
+                       'enable_social_sharing', ),
             'classes': ('baton-tabs-init', 'baton-tab-fs-seo',
                         'baton-tab-fs-adv')
         }),
@@ -29,7 +30,7 @@ class PageAdmin(admin.ModelAdmin):
     {% else %}
     fieldsets = (
         (None, {'fields': ('url', 'title', 'content', 'tags', 'sites',
-                           'enable_social_sharing', 'published', )}),
+                           'enable_social_sharing', 'status', )}),
         (_('SEO'), {
             'classes': ('collapse',),
             'fields': ('meta_title', 'meta_description', 'meta_keywords', ),
@@ -40,6 +41,7 @@ class PageAdmin(admin.ModelAdmin):
         }),
     )
     {% endif %}
-    list_display = ('url', 'title', 'published', )
-    list_filter = ('sites', 'registration_required', 'published', )
+    list_display = ('url', 'title', 'status', )
+    list_editable = ('status', )
+    list_filter = ('sites', 'registration_required', 'status', )
     search_fields = ('url', 'title')

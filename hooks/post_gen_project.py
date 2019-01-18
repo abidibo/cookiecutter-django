@@ -22,7 +22,7 @@ context = {{ cookiecutter }}
 if context['admin'] != 'django-baton':
     print('\n')
     print('POST HOOK' + '\n')
-    print('removing unused baton admin template' + '\n')
+    print('removing unused baton and constance admin template' + '\n')
     shutil.rmtree('./{{ cookiecutter.repo_name }}/{{ cookiecutter.core_name }}/templates/admin')
 
 shutil.move('gitignore', '.gitignore')
