@@ -78,7 +78,7 @@ def create_release_archive(head='HEAD'):
 def sync_virtualenv(virtualenv_path, requirements_path):
     """ Updates a virtualenv with  requirements file """
     if not files.exists(virtualenv_path):
-        erun('virtualenv --no-site-packages %s' % virtualenv_path)
+        erun('python3 -m venv %s' % virtualenv_path)
 
     erun('source %s/bin/activate && pip install -r %s' % (
         virtualenv_path,

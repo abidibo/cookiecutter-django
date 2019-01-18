@@ -8,6 +8,8 @@ import os
 from dotenv import load_dotenv
 from getenv import env
 
+from django.utils.translation import ugettext_lazy as _
+
 here = lambda *x: os.path.join(os.path.dirname( # noqa
                                os.path.realpath(__file__)), *x)
 
@@ -80,7 +82,9 @@ INSTALLED_APPS = (
     'taggit',
     'mptt',
     'treenav',
+    'apps.SettingsConfig',
     'pages',
+    'constance.backends.database',
     {% if cookiecutter.admin == 'django-baton' %}'baton.autodiscover',{% endif %}
 )
 
@@ -89,7 +93,6 @@ MIDDLEWARE = (
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
@@ -111,7 +114,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'treenav.context_processors.treenav_active',
-                'core.context_processors.debug',
+                '{{ cookiecutter.core_name }}.context_processors.debug',
             ],
         },
     },
@@ -132,6 +135,11 @@ USE_L10N = True
 
 USE_TZ = True
 
+# CONSTANCE
+CONSTANCE_BACKEND = 'constance.backends.database.DatabaseBackend'
+CONSTANCE_CONFIG = {
+    'HIDE_ARCHIVED': (True, _('Hide from admin lists archived records')),
+}
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
@@ -148,6 +156,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 # Uploaded files
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+FILE_UPLOAD_PERMISSIONS = 0o644
 
 # ADMIN
 {% if cookiecutter.admin == 'django-baton' %}
@@ -156,9 +165,10 @@ BATON = {
     'SITE_TITLE': '{{ cookiecutter.project_name }}',
     'INDEX_TITLE': 'Site administration',
     'MENU': (
-        {'type': 'title', 'label': 'Site',  'apps': ('auth', 'sites', )},
+        {'type': 'title', 'label': 'System',  'apps': ('auth', 'sites', 'constance', )},
         {'type': 'app', 'name': 'auth', 'label': 'Authentication', 'icon':'fa fa-lock'},
         {'type': 'model', 'app': 'sites', 'name': 'site', 'label': 'Sites', 'icon':'fa fa-leaf'},
+        {'type': 'model', 'app': 'constance', 'name': 'config', 'label': 'Settings', 'icon':'fa fa-cogs'},
 
         {% if cookiecutter.use_filer == 'y' %}
         {'type': 'title', 'label': 'Resources',  'apps': ('filer', )},
@@ -169,7 +179,7 @@ BATON = {
         {'type': 'model', 'app': 'treenav', 'name': 'menuitem', 'label': 'Menu', 'icon':'fa fa-bars'},
 
         {'type': 'title', 'label': 'Contents',  'apps': ('pages', )},
-        {'type': 'model', 'app': 'pages', 'name': 'page', 'label': 'Pagine', 'icon':'fa fa-book'},
+        {'type': 'model', 'app': 'pages', 'name': 'page', 'label': 'Pages', 'icon':'fa fa-book'},
     ),
     'COPYRIGHT': '© 2017 {{ cookiecutter.domain }}',
     'SUPPORT_HREF': 'mailto:stefano.contini@otto.to.it',
@@ -186,6 +196,7 @@ SUIT_CONFIG = {
 
         {'app': 'auth', 'label': 'Authentication', 'icon':'icon-lock'},
         {'app': 'sites', 'label': 'Sites', 'icon':'icon-leaf'},
+        {'app': 'constance', 'label': 'Settings', 'icon':'icon-cog'},
 
         {% if cookiecutter.use_filer == 'y' %}
         '-',
@@ -243,7 +254,6 @@ PIPELINE = {
     'STYLESHEETS': {
         'vendor': {
             'source_filenames': (
-                '{{ cookiecutter.core_name }}/src/vendor/tether/css/tether.min.css', # noqa
                 '{{ cookiecutter.core_name }}/src/vendor/Font-Awesome/scss/font-awesome.scss', # noqa
             ),
             'output_filename': '{{ cookiecutter.core_name }}/css/vendor.min.css', # noqa
@@ -258,7 +268,6 @@ PIPELINE = {
     'JAVASCRIPT': {
         'vendor': {
             'source_filenames': (
-                '{{ cookiecutter.core_name }}/src/vendor/tether/js/tether.min.js', # noqa
                 '{{ cookiecutter.core_name }}/src/vendor/popper/popper.min.js', # noqa
                 '{{ cookiecutter.core_name }}/src/vendor/bootstrap/js/bootstrap.min.js', # noqa
                 '{{ cookiecutter.core_name }}/src/vendor/moment/moment-with-locales.min.js', # noqa
@@ -342,6 +351,11 @@ LOGGING = {
         'django': {
             'handlers': ['file'],
             'level': 'DEBUG',
+            'propagate': True,
+        },
+       'django.template': {
+            'handlers': ['file'],
+            'level': 'INFO',
             'propagate': True,
         },
         'django.request': {

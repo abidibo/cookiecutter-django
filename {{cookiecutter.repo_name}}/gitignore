@@ -9,3 +9,5 @@ provisioning/ansible_remote_inventory
 provisioning/playbooks/roles/webapp/templates/env
 releases
 logs
+tags
+.gutctags

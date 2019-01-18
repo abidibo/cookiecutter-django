@@ -56,7 +56,7 @@ def render_page(request, p):
         from django.contrib.auth.views import redirect_to_login
         return redirect_to_login(request.path)
     # If page is not pusblished, raise 404
-    if not p.published:
+    if not p.status == Page.PUBLISHED:
         raise Http404
     if p.template_name:
         template = loader.select_template((p.template_name, DEFAULT_TEMPLATE))

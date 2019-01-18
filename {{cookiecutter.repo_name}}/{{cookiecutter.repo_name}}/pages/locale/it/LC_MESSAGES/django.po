@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-31 15:08+0200\n"
+"POT-Creation-Date: 2019-01-18 14:00+0100\n"
 "PO-Revision-Date: 2017-08-31 14444:16+0200\n"
 "Last-Translator: abidibo <abidibo@gmail.com>\n"
 "Language-Team: it <LL@li.org>\n"
@@ -29,7 +29,7 @@ msgstr "SEO"
 msgid "Advanced options"
 msgstr "Opzioni avanzate"
 
-#: forms.py:10 models.py:15
+#: forms.py:10 models.py:25
 msgid "URL"
 msgstr "URL"
 
@@ -37,7 +37,8 @@ msgstr "URL"
 msgid ""
 "Example: '/about/contact/'. Make sure to have leading and trailing slashes."
 msgstr ""
-"Esempio: '/about/contact/'. Assicurati di inserire le barre diagonali iniziali e finali."
+"Esempio: '/about/contact/'. Assicurati di inserire le barre diagonali "
+"iniziali e finali."
 
 #: forms.py:16
 msgid ""
@@ -60,27 +61,39 @@ msgstr "Manca una barra finale nella URL."
 msgid "Page with url %(url)s already exists for site %(site)s"
 msgstr "La flatpage con url %(url)s esiste già per il sito %(site)s"
 
-#: models.py:16
+#: models.py:20
+msgid "draft"
+msgstr "bozza"
+
+#: models.py:21
+msgid "published"
+msgstr "pubblicata"
+
+#: models.py:22
+msgid "archived"
+msgstr "archiviata"
+
+#: models.py:26
 msgid "title"
 msgstr "titolo"
 
-#: models.py:18
+#: models.py:28
 msgid "content"
 msgstr "contenuto"
 
-#: models.py:21
+#: models.py:31
 msgid "tags"
 msgstr "tag"
 
-#: models.py:21
+#: models.py:31
 msgid "comma separated values"
 msgstr "valori separati da virgola"
 
-#: models.py:24
+#: models.py:34
 msgid "template name"
 msgstr "nome template"
 
-#: models.py:28
+#: models.py:38
 msgid ""
 "Example: 'pages/contact_page.html'. If this isn't provided, the system will "
 "use 'pages/default.html'."
@@ -88,56 +101,56 @@ msgstr ""
 "Esempio: 'flatpages/contact_page.html'. Se non specificato, il sistema userà "
 "'flatpages/default.html'."
 
-#: models.py:33
+#: models.py:43
 msgid "registration required"
 msgstr "registrazione obbligatoria"
 
-#: models.py:34
+#: models.py:44
 msgid "If this is checked, only logged-in users will be able to view the page."
 msgstr ""
 "Se selezionato, solo gli utenti che hanno effettuato l'accesso potranno "
 "vedere la pagina."
 
-#: models.py:37
+#: models.py:47
 msgid "enable social sharing"
 msgstr "abilita condivisione social"
 
-#: models.py:39
+#: models.py:49
 msgid "sites"
 msgstr "siti"
 
-#: models.py:40
-msgid "published"
-msgstr "pubblicata"
+#: models.py:50
+msgid "status"
+msgstr "stato"
 
-#: models.py:43
+#: models.py:53
 msgid "meta title"
 msgstr "titolo meta tag"
 
-#: models.py:45
+#: models.py:55
 msgid "default to page title"
 msgstr "default: titolo pagina"
 
-#: models.py:48
+#: models.py:58
 msgid "meta description"
 msgstr "descrizione meta tag"
 
-#: models.py:49
+#: models.py:59
 msgid "default to first 20 words of content"
 msgstr "default: prime 20 parole del contenuto"
 
-#: models.py:52
+#: models.py:62
 msgid "meta keywords"
 msgstr "parole chiave meta tag"
 
-#: models.py:54
+#: models.py:64
 msgid "default to page tags"
 msgstr "default: tag"
 
-#: models.py:58
+#: models.py:68
 msgid "page"
 msgstr "pagina"
 
-#: models.py:59
+#: models.py:69
 msgid "pages"
 msgstr "pagine"

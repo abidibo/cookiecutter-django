@@ -1,0 +1,82 @@
+{% raw %}{% extends "admin/base_site.html" %}
+{% load admin_static admin_list i18n %}
+
+{% block extrastyle %}
+  {{ block.super }}
+  <link rel="stylesheet" type="text/css" href="{% static 'admin/css/changelists.css' %}" />
+  <link rel="stylesheet" type="text/css" href="{% static 'admin/css/forms.css' %}" />
+  {{ media.css }}
+  <style>
+    #result_list .changed {
+        background-color: #ffc;
+    }
+    #changelist table thead th .text {
+        padding: 2px 5px;
+    }
+    #changelist table tbody td:first-child {
+        text-align: left;
+    }
+    #changelist-form ul.errorlist {
+        margin: 0 !important;
+    }
+    .help {
+        font-weight: normal !important;
+    }
+  </style>
+{% endblock %}
+
+{% block extrahead %}
+{% url 'admin:jsi18n' as jsi18nurl %}
+<script type="text/javascript" src="{{ jsi18nurl|default:'../../jsi18n/' }}"></script>
+{{ block.super }}
+{{ media.js }}
+{% endblock %}
+
+{% block title %}
+    {% trans "Settings" %} | {% endraw %}{{ cookiecutter.project_name }}{% raw %}
+{% endblock title %}
+
+{% block branding %}
+<h1 id="site-name"><a href="/admin/">{% endraw %}{{ cookiecutter.project_name }}{% raw %}</a></h1>
+{% endblock %}
+
+{% block bodyclass %}change-list{% endblock %}
+
+{% block content %}
+  <div id="content-main" class="constance">
+    <div class="module" id="changelist">
+        <form id="changelist-form" action="" method="post" enctype="multipart/form-data">{% csrf_token %}
+            {% if form.errors %}
+            <ul class="errorlist">
+            {% endif %}
+            {% for field in form.hidden_fields %}
+                {% for error in field.errors %}
+                  <li class="alert alert-danger">{{ error }}</li>
+                {% endfor %}
+                {{ field }}
+            {% endfor %}
+            {% if form.errors %}
+            </ul>
+            {% endif %}
+
+            {% if fieldsets %}
+              {% for fieldset in fieldsets %}
+              <fieldset class="module">
+                  <h2>{{ fieldset.title }}</h2>
+                  {% with config_values=fieldset.config_values %}
+                    {% include "admin/constance/includes/results_list.html" %}
+                  {% endwith %}
+              </fieldset>
+              {% endfor %}
+            {% else %}
+              {% include "admin/constance/includes/results_list.html" %}
+            {% endif %}
+
+            <p class="paginator">
+              <input type="submit" name="_save" class="default" value="{% trans 'Save' %}"/>
+            </p>
+        </form>
+    </div>
+  </div>
+{% endblock %}
+{% endraw %}

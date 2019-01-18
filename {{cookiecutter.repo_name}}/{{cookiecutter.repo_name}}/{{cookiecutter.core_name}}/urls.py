@@ -14,6 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include(blog_urls))
 """
 from django.conf.urls import include, url
+from django.urls import path, re_path
 {% if cookiecutter.admin == 'django-baton' %}
 from baton.autodiscover import admin
 {% else %}
@@ -25,32 +26,33 @@ from django.views import static
 from django.contrib.staticfiles.views import serve
 
 urlpatterns = [
-    url(r'^admin/', include(admin.site.urls)),
+    path('admin/', admin.site.urls),
     {% if cookiecutter.admin == 'django-baton' %}
-    url(r'^baton/', include('baton.urls')),
+    path('baton/', include('baton.urls')),
     {% endif %}
-    url(r'^$', TemplateView.as_view(template_name='home.html'), name='home'),
+    re_path(r'^$', TemplateView.as_view(template_name='home.html'),
+            name='home'),
     # ckeditor uploader
-    url(r'^ckeditor/', include('ckeditor_uploader.urls')),
+    path('ckeditor/', include('ckeditor_uploader.urls')),
     # treenav
-    url(r'^treenav/', include('treenav.urls')),
+    path('treenav/', include('treenav.urls')),
     {% if cookiecutter.admin == 'django-grappelli' %}
     # grappelli
-    url(r'^grappelli/', include('grappelli.urls')),
+    path('grappelli/', include('grappelli.urls')),
     {% endif %}
 ]
 
 if settings.DEBUG:
     urlpatterns += [
-        url(r'^media/(?P<path>.*)$',
-            static.serve,
-            {'document_root': settings.MEDIA_ROOT}),
+        re_path(r'^media/(?P<path>.*)$',
+                static.serve,
+                {'document_root': settings.MEDIA_ROOT}),
     ]
     urlpatterns += [
-        url(r'^static/(?P<path>.*)$', serve),
+        re_path(r'^static/(?P<path>.*)$', serve),
     ]
     # debug toolbar
     import debug_toolbar
     urlpatterns += [
-        url(r'^__debug__/', include(debug_toolbar.urls)),
+        re_path(r'^__debug__/', include(debug_toolbar.urls)),
     ]

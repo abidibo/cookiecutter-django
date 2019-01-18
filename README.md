@@ -39,6 +39,7 @@ Running this you will have:
     - [django-ckeditor](https://github.com/django-ckeditor/django-ckeditor)
     - [django-treenav](https://github.com/caktus/django-treenav)
     - [django-cleanup](https://github.com/un1t/django-cleanup)
+    - [django-constance](https://github.com/jazzband/django-constance)
     - [django-simple-captcha](https://github.com/mbi/django-simple-captcha)
     - [django-taggit](https://github.com/alex/django-taggit)
     - [easy-thumbnails](https://github.com/SmileyChris/easy-thumbnails)
@@ -50,7 +51,7 @@ Running this you will have:
     - [django-disqus](https://github.com/arthurk/django-disqus) (optional)
 - pages with integrated ckeditor
 - git repository initialized and ready
-- bootstrap-4 beta
+- bootstrap 4.2.1
 - bin command to set up your production machine
 - fabfile ready for deployment
 
@@ -61,36 +62,37 @@ Running this you will have:
 
 ## Python Packages
 
-- Django==1.11.4
+- Django==2.1.5
 - django-getenv==1.3.1
 - MySQL-python==1.2.5
 - Fabric==1.12.0
-- Pillow==4.2.1
-- django-ckeditor==5.3.0
-- django-treenav==1.1.0
-- django-cleanup==1.0.1
-- django-pipeline==1.6.13
-- django-simple-captcha==0.5.55555
-- django-taggit==0.22.1
-- easy-thumbnails==2.4.1
+- Pillow==5.4.1
+- django-constance==2.3.1
+- django-ckeditor==5.6.1
+- django-treenav==1.2.0
+- django-cleanup==3.0.1
+- django-pipeline==1.6.14
+- django-simple-captcha==0.5.10
+- django-taggit==0.23.0
+- easy-thumbnails==2.5
 - ansible==2.2.0.0
-- python-dotenv==0.5.1
+- python-dotenv==0.10.1
 
 ### Optional:
 
 - django-disqus==0.5
-- django-filer==1.2.8
-- django-grappelli==2.10.1
-- django-suit==0.2.25
-- django-baton==1.0.2
+- django-filer==1.4.3
+- django-grappelli==2.12.2
+- django-suit==0.2.26
+- django-baton==1.3.2
 
 ### Local dev
 
-- django-debug-toolbar==1.5
+- django-debug-toolbar==1.11
 
 ### Production
 
-- uWSGI==2.0.13.1
+- uWSGI==2.0.17
 
 ## Frontend
 
@@ -100,7 +102,7 @@ jQuery as js framework, bootstrap as css framework, momentjs to deal with dateti
 
 - jQuery 1.11.3
 - moment.js
-- bootstrap v4.0.0 beta
+- bootstrap v4.2.1
 - FontAwesome 4.7.0
 
 ## Getting started
@@ -119,7 +121,7 @@ Answer the following questions:
 - __project_description__: project description. Default "My New Project description"
 - __repo\_name__: name of the repository. Default "[project\_name | lower | replace(' ', '-')]"
 - __core\_name__: name of the main application. Default "[repo\_name | replace('-', '\_')]"
-- __admin__: django admin app package. Possible values: django-baton, django-suit, django-grappelli, default. Default "default"
+- __admin__: django admin app package. Possible values: django-baton, django-suit, django-grappelli, default. Default "django-baton"
 - __use_filer__: whether or not to install django-filer [y|n]. Default "n"
 - __use_disqus__: whether or not to install django-disqus [y|n]. Default "n"
 - __language_code__: language code. Default "en-us"
