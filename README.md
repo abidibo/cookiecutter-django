@@ -9,9 +9,6 @@ Running this you will have:
 - a bin command which will set up the remote machine for you (using ansible) and will display a maintenance page
 - some production commands to manage the deploy and related stuff.
 
-> **Important!**
-> New stuff is added to the `py3` branch. Actually soon I'll merge this branch in `master` because django 2 requires python 3 and now almost every django third party app supports python 3.
-
 ## Environment
 
 [Cookiecutter](https://github.com/audreyr/cookiecutter) is uset to create a working directory already configured.
