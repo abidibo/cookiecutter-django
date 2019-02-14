@@ -1,4 +1,4 @@
-Django==2.1.5
+Django==2.1.7
 django-ckeditor==5.6.1
 django-constance==2.3.1
 django-cleanup==3.0.1

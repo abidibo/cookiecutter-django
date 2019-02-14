@@ -62,7 +62,7 @@ Running this you will have:
 
 ## Python Packages
 
-- Django==2.1.5
+- Django==2.1.7
 - django-getenv==1.3.1
 - MySQL-python==1.2.5
 - Fabric==1.12.0
