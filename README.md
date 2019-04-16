@@ -59,29 +59,29 @@ Running this you will have:
 
 ## Python Packages
 
-- Django==2.1.7
+- Django==2.2
 - django-getenv==1.3.1
-- MySQL-python==1.2.5
-- Fabric==1.12.0
-- Pillow==5.4.1
-- django-constance==2.3.1
+- mysqlclient==1.4.2.post1
+- Fabric==1.14.0
+- Pillow==6.0.0
+- django-constance==2.4.0
 - django-ckeditor==5.6.1
-- django-treenav==1.2.0
-- django-cleanup==3.0.1
+- git+git://github.com/CARocha/django-treenav.git@82c65a8c16ebb568308ea7c99fd2c96108d1c743
+- django-cleanup==3.2.0
 - django-pipeline==1.6.14
-- django-simple-captcha==0.5.10
-- django-taggit==0.23.0
-- easy-thumbnails==2.5
+- django-simple-captcha==0.5.11
+- django-taggit==1.1.0
+- easy-thumbnails==2.6
 - ansible==2.2.0.0
 - python-dotenv==0.10.1
 
 ### Optional:
 
+- django-baton==1.3.6
 - django-disqus==0.5
-- django-filer==1.4.3
+- django-filer==1.4.4
 - django-grappelli==2.12.2
 - django-suit==0.2.26
-- django-baton==1.3.2
 
 ### Local dev
 
