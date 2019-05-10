@@ -1,4 +1,4 @@
 from django.conf import settings
 
-def debug(context):
+def debug(request):
   return {'DEBUG': settings.DEBUG}
