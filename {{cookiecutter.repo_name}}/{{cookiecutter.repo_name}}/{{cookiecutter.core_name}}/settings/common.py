@@ -116,6 +116,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'treenav.context_processors.treenav_active',
                 '{{ cookiecutter.core_name }}.context_processors.debug',
+                '{{ cookiecutter.core_name }}.context_processors.absurl',
             ],
         },
     },
@@ -141,7 +142,6 @@ CONSTANCE_BACKEND = 'constance.backends.database.DatabaseBackend'
 CONSTANCE_CONFIG = {
     'HIDE_ARCHIVED': (True, _('Hide from admin lists archived records')),
     'SITE_TITLE': ('{{ cookiecutter.project_name }}', _('Site title')),
-    'SITE_URL': ('https://{{ cookiecutter.domain }}', _('Site URL')),
     'META_TITLE': ('{{ cookiecutter.project_name }}', _('Meta title')),
     'META_DESCRIPTION': ('{{ cookiecutter.project_description }}', _('Meta description')),
     'META_KEYWORDS': ('', _('Meta keywords')),
@@ -156,7 +156,7 @@ CONSTANCE_CONFIG = {
 }
 
 CONSTANCE_CONFIG_FIELDSETS = {
-    _('SEO'): ('SITE_TITLE', 'SITE_URL', 'META_TITLE', 'META_DESCRIPTION', 'META_KEYWORDS', ),
+    _('SEO'): ('SITE_TITLE', 'META_TITLE', 'META_DESCRIPTION', 'META_KEYWORDS', ),
     _('Facebook Sharing'): ('OG_TITLE', 'OG_TYPE', 'OG_DESCRIPTION',
                             'OG_IMAGE', ),
     _('Twitter Sharing'): ('TWITTER_TITLE', 'TWITTER_DESCRIPTION',
