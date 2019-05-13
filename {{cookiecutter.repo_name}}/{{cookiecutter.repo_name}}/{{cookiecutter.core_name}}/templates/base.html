@@ -5,24 +5,28 @@
     <head>
         <meta charset="utf-8" />
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
-        <title>{% block title %}{% endraw %}{{ cookiecutter.project_name }}{% raw %}{% endblock %}</title>
+        <title>{% block title %}{{ config.SITE_TITLE }}{% endblock %}</title>
         {% block meta %}
-            <meta name="title" content="{% block meta_title %}{% endraw %}{{ cookiecutter.project_name }}{% raw %}{% endblock %}" />
-            <meta name="description" content="{% block meta_description %}{% endraw %}{{ cookiecutter.project_description }}{% raw %}{% endblock %}" />
-            <meta name="keywords" content="{% block meta_keywords %}{% endblock %}" />
+            <meta name="title" content="{% block meta_title %}{{ config.META_TITLE }}{% endblock %}" />
+            <meta name="description" content="{% block meta_description %}{{ config.META_DESCRIPTION }}{% endblock %}" />
+            <meta name="keywords" content="{% block meta_keywords %}{{ config.META_KEYWORDS }}{% endblock %}" />
             {% block meta_extra %}{% endblock %}
-
-            <meta property="og:title" content="{% block meta_og_title %}{% endraw %}{{ cookiecutter.project_name }}{% raw %}{% endblock %}" />
-            <meta property="og:type" content="{% block meta_og_type %}website{% endblock %}" />
-            <meta property="og:url" content="{% block meta_og_url %}http://{% endraw %}{{ cookiecutter.domain }}{% raw %}{% endblock %}" />
-            <meta property="og:description" content="{% block meta_og_description %}{% endraw %}{{ cookiecutter.project_description }}{% raw %}{% endblock %}" />
+            {% comment %}Open Graph{% endcomment %}
+            <meta property="og:title" content="{% block meta_og_title %}{{ config.OG_TITLE }}{% endblock %}" />
+            <meta property="og:type" content="{% block meta_og_type %}{{ config.OG_TYPE }}{% endblock %}" />
+            <meta property="og:url" content="{% block meta_og_url %}{{ config.SITE_URL }}{% endblock %}" />
+            <meta property="og:description" content="{% block meta_og_description %}{{ config.OG_DESCRIPTION }}{% endblock %}" />
+            <meta property="og:image" content="{% block meta_og_image %}{{ config.OG_IMAGE }}{% endblock %}" />
             {% block meta_og_extra %}{% endblock %}
-
+            {% comment %}Twitter{% endcomment %}
             <meta name="twitter:card" content="{% block meta_tw_card %}summary{% endblock %}" />
-            <meta name="twitter:url" content="{% block meta_tw_url %}http://{% endraw %}{{ cookiecutter.domain }}{% raw %}{% endblock %}" />
-            <meta name="twitter:title" content="{% block meta_tw_title %}{% endraw %}{{ cookiecutter.project_name }}{% raw %}{% endblock %}" />
-            <meta name="twitter:description" content="{% block meta_tw_description %}{% endraw %}{{ cookiecutter.project_description }}{% raw %}{% endblock %}" />
-            <meta name="twitter:creator" content="{% block meta_tw_creator %}{% endblock %}" />
+            <meta name="twitter:url" content="{% block meta_tw_url %}{{ config.SITE_URL }}{% endblock %}" />
+            <meta name="twitter:title" content="{% block meta_tw_title %}{{ config.TWITTER_TITLE }}{% endblock %}" />
+            <meta name="twitter:description" content="{% block meta_tw_description %}{{ config.TWITTER_DESCRIPTION }}{% endblock %}" />
+            {% if config.TWITTER_CREATOR %}
+                <meta name="twitter:creator" content="{% block meta_tw_creator %}{{ config.TWITTER_CREATOR }}{% endblock %}" />
+            {% endif %}
+            <meta name="twitter:image" content="{% block meta_tw_image %}{{ config.TWITTER_IMAGE }}{% endblock %}" />
             {% block meta_tw_extra %}{% endblock %}
         {% endblock %}
         {% stylesheet 'vendor' %}

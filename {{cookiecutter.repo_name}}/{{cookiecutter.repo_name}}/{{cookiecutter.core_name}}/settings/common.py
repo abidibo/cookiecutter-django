@@ -109,6 +109,7 @@ TEMPLATES = [
         'OPTIONS': {
             'debug': False,
             'context_processors': [
+                'constance.context_processors.config',
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
@@ -139,6 +140,28 @@ USE_TZ = True
 CONSTANCE_BACKEND = 'constance.backends.database.DatabaseBackend'
 CONSTANCE_CONFIG = {
     'HIDE_ARCHIVED': (True, _('Hide from admin lists archived records')),
+    'SITE_TITLE': ('{{ cookiecutter.project_name }}', _('Site title')),
+    'SITE_URL': ('https://{{ cookiecutter.domain }}', _('Site URL')),
+    'META_TITLE': ('{{ cookiecutter.project_name }}', _('Meta title')),
+    'META_DESCRIPTION': ('{{ cookiecutter.project_description }}', _('Meta description')),
+    'META_KEYWORDS': ('', _('Meta keywords')),
+    'OG_TITLE': ('{{ cookiecutter.project_name }}', _('Open Graph title')),
+    'OG_TYPE': ('website', _('Open Graph type')),
+    'OG_DESCRIPTION': ('{{ cookiecutter.project_description }}', _('Open Graph description')),
+    'OG_IMAGE': ('', _('Open Graph image')),
+    'TWITTER_TITLE': ('{{ cookiecutter.project_name }}', _('Twitter title')),
+    'TWITTER_DESCRIPTION': ('{{ cookiecutter.project_description }}', _('Twitter description')),
+    'TWITTER_CREATOR': ('', _('Twitter creator')),
+    'TWITTER_IMAGE': ('', _('Twitter image')),
+}
+
+CONSTANCE_CONFIG_FIELDSETS = {
+    _('SEO'): ('SITE_TITLE', 'SITE_URL', 'META_TITLE', 'META_DESCRIPTION', 'META_KEYWORDS', ),
+    _('Facebook Sharing'): ('OG_TITLE', 'OG_TYPE', 'OG_DESCRIPTION',
+                            'OG_IMAGE', ),
+    _('Twitter Sharing'): ('TWITTER_TITLE', 'TWITTER_DESCRIPTION',
+                           'TWITTER_CREATOR', 'TWITTER_IMAGE', ),
+    _('Administration'): ('HIDE_ARCHIVED', ),
 }
 
 # Static files (CSS, JavaScript, Images)
