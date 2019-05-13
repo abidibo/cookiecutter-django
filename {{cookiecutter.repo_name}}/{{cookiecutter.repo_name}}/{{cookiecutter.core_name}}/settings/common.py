@@ -33,6 +33,8 @@ ADMINS = (
     ('{{ cookiecutter.author }}', '{{ cookiecutter.email }}'),
 )
 
+AUTH_USER_MODEL = 'core.User'
+
 # SITE
 SITE_ID = 1
 
