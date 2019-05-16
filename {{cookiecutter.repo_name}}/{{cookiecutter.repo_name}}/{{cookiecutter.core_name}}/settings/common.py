@@ -158,12 +158,12 @@ CONSTANCE_CONFIG = {
 }
 
 CONSTANCE_CONFIG_FIELDSETS = {
-    _('SEO'): ('SITE_TITLE', 'META_TITLE', 'META_DESCRIPTION', 'META_KEYWORDS', ),
-    _('Facebook Sharing'): ('OG_TITLE', 'OG_TYPE', 'OG_DESCRIPTION',
+    'SEO': ('SITE_TITLE', 'META_TITLE', 'META_DESCRIPTION', 'META_KEYWORDS', ),
+    'Facebook Sharing': ('OG_TITLE', 'OG_TYPE', 'OG_DESCRIPTION',
                             'OG_IMAGE', ),
-    _('Twitter Sharing'): ('TWITTER_TITLE', 'TWITTER_DESCRIPTION',
+    'Twitter Sharing': ('TWITTER_TITLE', 'TWITTER_DESCRIPTION',
                            'TWITTER_CREATOR', 'TWITTER_IMAGE', ),
-    _('Administration'): ('HIDE_ARCHIVED', ),
+    'Administration': ('HIDE_ARCHIVED', ),
 }
 
 # Static files (CSS, JavaScript, Images)
