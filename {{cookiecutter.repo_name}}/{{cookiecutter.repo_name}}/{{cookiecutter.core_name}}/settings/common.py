@@ -73,6 +73,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'ckeditor',
     'ckeditor_uploader',
+    'django_user_agents',
     'pipeline',
     {% if cookiecutter.use_filer == 'y' %}
     'filer',
@@ -99,6 +100,7 @@ MIDDLEWARE = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'pages.middleware.PageFallbackMiddleware',
+    'django_user_agents.middleware.UserAgentMiddleware',
 )
 
 ROOT_URLCONF = '{{ cookiecutter.core_name }}.urls'

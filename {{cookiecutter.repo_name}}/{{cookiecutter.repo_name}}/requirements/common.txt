@@ -27,3 +27,7 @@ django-grappelli==2.12.2
 {% if cookiecutter.use_filer == 'y' %}
 django-filer==1.4.4
 {% endif %}
+PyYAML==5.1
+ua-parser==0.8.0
+user-agents==2.0
+django-user-agents==0.3.2

@@ -37,6 +37,7 @@ Running this you will have:
     - [django-treenav](https://github.com/caktus/django-treenav)
     - [django-cleanup](https://github.com/un1t/django-cleanup)
     - [django-constance](https://github.com/jazzband/django-constance)
+    - [django-user_agents](https://github.com/selwin/django-user_agents)
     - [django-simple-captcha](https://github.com/mbi/django-simple-captcha)
     - [django-taggit](https://github.com/alex/django-taggit)
     - [easy-thumbnails](https://github.com/SmileyChris/easy-thumbnails)
@@ -65,6 +66,7 @@ Running this you will have:
 - Fabric==1.14.0
 - Pillow==6.0.0
 - django-constance==2.4.0
+- django-user-agents==0.3.2
 - django-ckeditor==5.6.1
 - git+git://github.com/CARocha/django-treenav.git@82c65a8c16ebb568308ea7c99fd2c96108d1c743
 - django-cleanup==3.2.0
