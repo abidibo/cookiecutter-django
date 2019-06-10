@@ -193,7 +193,8 @@ BATON = {
     'INDEX_TITLE': 'Site administration',
     'MENU': (
         {'type': 'title', 'label': 'System',  'apps': ('auth', 'sites', 'constance', )},
-        {'type': 'app', 'name': 'auth', 'label': 'Authentication', 'icon':'fa fa-lock'},
+        {'type': 'model', 'app': 'core', 'name': 'user', 'label': 'Users', 'icon':'fa fa-user'},
+        {'type': 'model', 'app': 'auth', 'name': 'group', 'label': 'Groups', 'icon':'fa fa-users'},
         {'type': 'model', 'app': 'sites', 'name': 'site', 'label': 'Sites', 'icon':'fa fa-leaf'},
         {'type': 'model', 'app': 'constance', 'name': 'config', 'label': 'Settings', 'icon':'fa fa-cogs'},
 
