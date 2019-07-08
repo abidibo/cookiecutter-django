@@ -1,4 +1,4 @@
-from django import template
+{% raw %}from django import template
 from django.core.cache import cache
 from django.template.loader import render_to_string
 
@@ -141,3 +141,4 @@ class ActiveMenuItemsNode(CaktNode):
 def show_menu_crumbs(parser, token):
     tag_name, args, kwargs = parse_args_kwargs(parser, token)
     return ActiveMenuItemsNode(*args, **kwargs)
+{% endraw %}

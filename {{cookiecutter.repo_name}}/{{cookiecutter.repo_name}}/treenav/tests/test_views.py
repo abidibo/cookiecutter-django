@@ -1,4 +1,4 @@
-from django.contrib.auth.models import User
+{% raw %}from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.core.cache import cache
 from django.urls import reverse
@@ -452,3 +452,4 @@ class SimultaneousReorderTestCase(TestCase):
         # Check if the lft and rght attributes assigned by mptt are correct
         self.assertNotEqual(order[0].lft, order[1].lft)
         self.assertNotEqual(order[0].rght, order[1].rght)
+{% endraw %}

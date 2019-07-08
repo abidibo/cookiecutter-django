@@ -1,4 +1,4 @@
-from django.conf.urls import url, include, handler404
+{% raw %}from django.conf.urls import url, include, handler404
 from django.http import HttpResponse, HttpResponseNotFound
 from django.template import Template, Context
 
@@ -39,3 +39,4 @@ urlpatterns = [
     url(r'^item/(?P<item_slug>[\w-]+)/$', test_view, name='test_view'),
     url(r'^old/', include(treenav.urls)),
 ]
+{% endraw %}

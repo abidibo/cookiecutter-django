@@ -1,4 +1,4 @@
-{% load i18n %}
+{% raw %}{% load i18n %}
 {% if active_menu_items %}
     <ul>
         {% for item in active_menu_items %}
@@ -9,4 +9,4 @@
             </li>
         {% endfor %}
     </ul>
-{% endif %}
+{% endif %}{% endraw %}

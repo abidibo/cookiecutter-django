@@ -1,4 +1,4 @@
-{% extends "admin/mptt_change_list.html" %}
+{% raw %}{% extends "admin/mptt_change_list.html" %}
 {% load i18n %}
 
 {% block object-tools-items %}
@@ -18,4 +18,4 @@
       </a>
     </li>
     {{ block.super }}
-{% endblock %}
+{% endblock %}{% endraw %}
