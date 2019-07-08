@@ -47,10 +47,10 @@ def get_remote_revision():
     try:
         _, remote_revision = current_app_dir.split('-')
     except Exception as e:
-        print e
+        print(e)
         remote_revision = 'unknown'
 
-    print remote_revision
+    print(remote_revision)
     return remote_revision
 
 def describe_revision(head='HEAD'):
@@ -145,32 +145,32 @@ def deploy(head='HEAD', requirements='requirements/production.txt'):
 
         restart()
 
-        print '''
+        print('''
     ####################################
     #              shell               #
     ####################################
-    '''
-        print '''
+    ''')
+        print('''
         %s --> %s
             Use 'ps ax | grep uwsgi' to check uwsgi processes
             If first deploy run 'python manage.py createsuperuser' to create new superuser
-        ''' % (previous_version, actual_version)
+        ''' % (previous_version, actual_version))
         open_shell('cd %s && source %s/bin/activate' % (
             current_release_dir,
             virtualenv_path,
         ))
 
     except CommandFailed as e:
-        print 'An error occoured: %s' % e
-        print '''
+        print('An error occoured: %s' % e)
+        print('''
     ####################################
     #        fallback to shell         #
     ####################################
-    '''
-        print '''
+    ''')
+        print('''
         %s --> %s
             Use '../../.virtualenv/bin/uwsgi --ini uwsgi.ini' to start uwsgi
-        ''' % (previous_version, actual_version)
+        ''' % (previous_version, actual_version))
         open_shell('cd %s && source %s/bin/activate' % (
             release_dir,
             virtualenv_path,
