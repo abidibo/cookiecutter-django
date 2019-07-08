@@ -1,12 +1,11 @@
 from __future__ import unicode_literals
 
+from ckeditor_uploader.fields import RichTextUploadingField
 from django.contrib.sites.models import Site
 from django.db import models
 from django.urls import get_script_prefix
 from django.utils.encoding import iri_to_uri, python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
-
-from ckeditor_uploader.fields import RichTextUploadingField
 from taggit.managers import TaggableManager
 
 
@@ -17,57 +16,66 @@ class Page(models.Model):
     ARCHIVED = 3
 
     STATUS_CHOICES = (
-        (DRAFT, _('draft')),
-        (PUBLISHED, _('published')),
-        (ARCHIVED, _('archived')),
+        (DRAFT, 'bozza'),
+        (PUBLISHED, 'pubblicato'),
+        (ARCHIVED, 'archiviato'),
     )
 
+    parent = models.ForeignKey(
+        'self',
+        verbose_name=_('parent'),
+        on_delete=models.SET_NULL,
+        related_name='children',
+        blank=True,
+        null=True,
+        help_text=_('Used to compose breadcrumbs'))
     url = models.CharField(_('URL'), max_length=100, db_index=True)
     title = models.CharField(_('title'), max_length=200)
-    content = RichTextUploadingField(
-        verbose_name=_('content'),
-        blank=True)
+    content = RichTextUploadingField(verbose_name=_('content'), blank=True)
     tags = TaggableManager(
-        _('tags'), help_text=_('comma separated values'),
-        blank=True)
+        _('tags'), help_text=_('comma separated values'), blank=True)
     template_name = models.CharField(
         _('template name'),
         max_length=70,
         blank=True,
         help_text=_(
             "Example: 'pages/contact_page.html'. If this isn't provided, "
-            "the system will use 'pages/default.html'."
-        ),
+            "the system will use 'pages/default.html'."),
     )
     registration_required = models.BooleanField(
         _('registration required'),
-        help_text=_("If this is checked, only logged-in users will be able to view the page."), # noqa
+        help_text=
+        _("If this is checked, only logged-in users will be able to view the page."
+          ),  # noqa
         default=False,
     )
-    enable_social_sharing = models.BooleanField(_('enable social sharing'),
-                                                default=False)
+    enable_social_sharing = models.BooleanField(
+        _('enable social sharing'), default=False)
     sites = models.ManyToManyField(Site, verbose_name=_('sites'))
-    status = models.IntegerField(verbose_name=_('status'), choices=STATUS_CHOICES, default=DRAFT)
+    status = models.IntegerField(choices=STATUS_CHOICES, default=DRAFT)
     # seo
     meta_title = models.CharField(
-        _('meta title'), max_length=200,
-        blank=True, null=True,
-        help_text=_('default to page title')
-    )
+        _('meta title'),
+        max_length=200,
+        blank=True,
+        null=True,
+        help_text=_('default to page title'))
     meta_description = models.TextField(
-        _('meta description'), blank=True, null=True,
-        help_text=_('default to first 20 words of content')
-    )
+        _('meta description'),
+        blank=True,
+        null=True,
+        help_text=_('default to first 20 words of content'))
     meta_keywords = models.CharField(
-        _('meta keywords'), max_length=200,
-        blank=True, null=True,
-        help_text=_('default to page tags')
-    )
+        _('meta keywords'),
+        max_length=200,
+        blank=True,
+        null=True,
+        help_text=_('default to page tags'))
 
     class Meta:
         verbose_name = _('page')
         verbose_name_plural = _('pages')
-        ordering = ('url',)
+        ordering = ('url', )
 
     def __str__(self):
         return "%s -- %s" % (self.url, self.title)
