@@ -17,9 +17,9 @@ class Page(models.Model):
     ARCHIVED = 3
 
     STATUS_CHOICES = (
-        (DRAFT, 'bozza'),
-        (PUBLISHED, 'pubblicato'),
-        (ARCHIVED, 'archiviato'),
+        (DRAFT, _('draft')),
+        (PUBLISHED, _('published')),
+        (ARCHIVED, _('archived')),
     )
 
     url = models.CharField(_('URL'), max_length=100, db_index=True)
@@ -47,7 +47,7 @@ class Page(models.Model):
     enable_social_sharing = models.BooleanField(_('enable social sharing'),
                                                 default=False)
     sites = models.ManyToManyField(Site, verbose_name=_('sites'))
-    status = models.IntegerField(choices=STATUS_CHOICES, default=DRAFT)
+    status = models.IntegerField(verbose_name=_('status'), choices=STATUS_CHOICES, default=DRAFT)
     # seo
     meta_title = models.CharField(
         _('meta title'), max_length=200,
