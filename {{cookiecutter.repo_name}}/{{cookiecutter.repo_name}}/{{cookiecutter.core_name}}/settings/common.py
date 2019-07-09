@@ -81,6 +81,7 @@ INSTALLED_APPS = (
     'django_cleanup',
     'captcha',
     'easy_thumbnails',
+    'sorl.thumbnail',
     {% if cookiecutter.use_disqus == 'y' %}'disqus',{% endif %}
     'taggit',
     'mptt',
@@ -122,6 +123,9 @@ TEMPLATES = [
                 '{{ cookiecutter.core_name }}.context_processors.debug',
                 '{{ cookiecutter.core_name }}.context_processors.absurl',
             ],
+            'libraries': {
+                'sorl_thumbnail': 'sorl.thumbnail.templatetags.thumbnail',
+            },
         },
     },
 ]
