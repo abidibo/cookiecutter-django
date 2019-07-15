@@ -36,6 +36,10 @@ urlpatterns = [
     path('ckeditor/', include('ckeditor_uploader.urls')),
     # treenav
     path('treenav/', include('treenav.urls')),
+    {% if cookiecutter.use_filer == 'y' %}
+    # filer
+    path('filer/', include('filer.urls')),
+    {% endif %}
     {% if cookiecutter.admin == 'django-grappelli' %}
     # grappelli
     path('grappelli/', include('grappelli.urls')),
