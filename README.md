@@ -9,6 +9,11 @@ Running this you will have:
 - a bin command which will set up the remote machine for you (using ansible) and will display a maintenance page
 - some production commands to manage the deploy and related stuff.
 
+
+> **Important**
+> For the semantic-ui version, please use the semantic-ui branch, the master one uses bootstrap4 at the momenet.
+
+
 ## Environment
 
 [Cookiecutter](https://github.com/audreyr/cookiecutter) is uset to create a working directory already configured.
