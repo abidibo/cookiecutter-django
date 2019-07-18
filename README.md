@@ -11,7 +11,7 @@ Running this you will have:
 
 
 > **Important**    
-> For the semantic-ui version, please use the semantic-ui branch, the master one uses bootstrap4 at the momenet.
+> For the semantic-ui version, please use the semantic-ui branch, the master one uses bootstrap4 at the moment.
 
 
 ## Environment
