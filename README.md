@@ -10,7 +10,7 @@ Running this you will have:
 - some production commands to manage the deploy and related stuff.
 
 
-> **Important**
+> **Important**    
 > For the semantic-ui version, please use the semantic-ui branch, the master one uses bootstrap4 at the momenet.
 
 
