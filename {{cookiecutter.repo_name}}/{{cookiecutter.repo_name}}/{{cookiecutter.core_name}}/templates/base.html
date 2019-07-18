@@ -38,7 +38,7 @@
         </head>
         <body class="{% block body_css %}{% endblock %}">
             {% block navbar %}
-                <div class="ui top menu fixed navbar main-navbar">
+                <div class="ui top menu navbar main-navbar">
                     <a class="item" onclick="core.IS_LOGO_LINK_ACTIVE = false; $('.ui.sidebar').sidebar({transition: 'push', onHidden: function() { $('body').removeClass('pushable'); core.IS_LOGO_LINK_ACTIVE = true }}).sidebar('toggle')" href="javascript:void(0)">
                         <i class="icon big bars"></i>
                     </a>
