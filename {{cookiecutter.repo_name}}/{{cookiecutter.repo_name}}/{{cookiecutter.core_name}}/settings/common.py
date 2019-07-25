@@ -74,6 +74,7 @@ INSTALLED_APPS = (
     'ckeditor',
     'ckeditor_uploader',
     'django_user_agents',
+    'django_extensions',
     'pipeline',
     {% if cookiecutter.use_filer == 'y' %}
     'filer',
