@@ -74,12 +74,14 @@ INSTALLED_APPS = (
     'ckeditor',
     'ckeditor_uploader',
     'django_user_agents',
+    'django_extensions',
     'pipeline',
     {% if cookiecutter.use_filer == 'y' %}
     'filer',
     {% endif %}
     'django_cleanup',
     'captcha',
+    'subject_imagefield',
     'easy_thumbnails',
     'sorl.thumbnail',
     {% if cookiecutter.use_disqus == 'y' %}'disqus',{% endif %}
