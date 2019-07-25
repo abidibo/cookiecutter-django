@@ -323,6 +323,13 @@ PIPELINE = {
     'COMPILERS': ('pipeline.compilers.sass.SASSCompiler', ),
     'CSS_COMPRESSOR': None,
     'JS_COMPRESSOR': None,
+    'MIMETYPES': (
+      ('text/coffeescript', '.coffee'),
+      ('text/less', '.less'),
+      ('text/javascript', '.js'),
+      ('text/x-sass', '.sass'),
+      ('text/x-scss', '.scss')
+    )
 }
 
 {% if cookiecutter.use_disqus == 'y' %}
