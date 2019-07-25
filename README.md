@@ -43,7 +43,9 @@ Running this you will have:
     - [django-cleanup](https://github.com/un1t/django-cleanup)
     - [django-constance](https://github.com/jazzband/django-constance)
     - [django-user_agents](https://github.com/selwin/django-user_agents)
+    - [django-extensions](https://github.com/django-extensions/django-extensions)
     - [django-simple-captcha](https://github.com/mbi/django-simple-captcha)
+    - [django-subject-imagefield](https://github.com/otto-torino/django-subject-imagefield)
     - [django-taggit](https://github.com/alex/django-taggit)
     - [easy-thumbnails](https://github.com/SmileyChris/easy-thumbnails)
     - [django-debug-toolbar](https://github.com/django-debug-toolbar/django-debug-toolbar)
@@ -62,41 +64,6 @@ Running this you will have:
 
 - mysql everywhere and already installed in the __local__ machine
 - environment variables for configuration
-
-## Python Packages
-
-- Django==2.2
-- django-getenv==1.3.1
-- mysqlclient==1.4.2.post1
-- Fabric==1.14.0
-- Pillow==6.0.0
-- django-constance==2.4.0
-- django-user-agents==0.3.2
-- django-ckeditor==5.6.1
-- git+git://github.com/CARocha/django-treenav.git@82c65a8c16ebb568308ea7c99fd2c96108d1c743
-- django-cleanup==3.2.0
-- django-pipeline==1.6.14
-- django-simple-captcha==0.5.11
-- django-taggit==1.1.0
-- easy-thumbnails==2.6
-- ansible==2.2.0.0
-- python-dotenv==0.10.1
-
-### Optional:
-
-- django-baton==1.3.6
-- django-disqus==0.5
-- django-filer==1.4.4
-- django-grappelli==2.12.2
-- django-suit==0.2.26
-
-### Local dev
-
-- django-debug-toolbar==1.11
-
-### Production
-
-- uWSGI==2.0.17
 
 ## Frontend
 
