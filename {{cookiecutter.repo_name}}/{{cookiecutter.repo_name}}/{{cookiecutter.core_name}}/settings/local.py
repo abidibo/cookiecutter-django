@@ -23,10 +23,10 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # CKEDITOR
 CKEDITOR_CONFIGS['default']['contentsCss'] = [
-    STATIC_URL + 'core/src/vendor/Font-Awesome/scss/font-awesome.css',
-    STATIC_URL + 'core/src/vendor/semantic-ui/semantic.min.css',
-    STATIC_URL + 'core/src/scss/styles.css',
-    STATIC_URL + 'core/src/css/ckeditor.css']
+    STATIC_URL + '{{ cookiecutter.core_name }}/src/vendor/Font-Awesome/scss/font-awesome.css',
+    STATIC_URL + '{{ cookiecutter.core_name }}/src/vendor/semantic-ui/semantic.min.css',
+    STATIC_URL + '{{ cookiecutter.core_name }}/src/scss/styles.css',
+    STATIC_URL + '{{ cookiecutter.core_name }}/src/css/ckeditor.css']
 
 # DEBUG_TOOLBAR
 JQUERY_URL = ''
