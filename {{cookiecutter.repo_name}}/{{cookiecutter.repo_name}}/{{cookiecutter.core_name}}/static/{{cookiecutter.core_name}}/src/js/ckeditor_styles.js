@@ -38,7 +38,7 @@ CKEDITOR.stylesSet.add( 'core_styles', [
 
     // Inline styles.
     { name: 'Txt evidenziato', element: 'mark', attributes: { 'class': '' } },
-    { name: 'Img responsive', element: 'img', attributes: { 'class': 'img-responsive' } },
+    { name: 'Img responsive', element: 'img', attributes: { 'class': 'img-fluid' } },
     { name: 'Img fluid', element: 'img', attributes: { 'class': 'ui fluid image' } },
     { name: 'Img bordata', element: 'img', attributes: { 'class': 'ui bordered image' } },
     { name: 'Img arrotondata', element: 'img', attributes: { 'class': 'ui rounded image' } },
