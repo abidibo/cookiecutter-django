@@ -1,63 +1,57 @@
 {% raw %}{% load static %}
-{% load pipeline %}
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8" />
-        <meta content="width=device-width, initial-scale=1.0" name="viewport">
-        <title>{% block title %}{{ config.SITE_TITLE }}{% endblock %}</title>
-        {% block meta %}
-            <meta name="title" content="{% block meta_title %}{{ config.META_TITLE }}{% endblock %}" />
-            <meta name="description" content="{% block meta_description %}{{ config.META_DESCRIPTION }}{% endblock %}" />
-            <meta name="keywords" content="{% block meta_keywords %}{{ config.META_KEYWORDS }}{% endblock %}" />
-            {% block meta_extra %}{% endblock %}
-            {% comment %}Open Graph{% endcomment %}
-            <meta property="og:title" content="{% block meta_og_title %}{{ config.OG_TITLE }}{% endblock %}" />
-            <meta property="og:type" content="{% block meta_og_type %}{{ config.OG_TYPE }}{% endblock %}" />
-            <meta property="og:url" content="{% block meta_og_url %}{{ ABSURL }}{% endblock %}" />
-            <meta property="og:description" content="{% block meta_og_description %}{{ config.OG_DESCRIPTION }}{% endblock %}" />
-            <meta property="og:image" content="{% block meta_og_image %}{{ config.OG_IMAGE }}{% endblock %}" />
-            {% block meta_og_extra %}{% endblock %}
-            {% comment %}Twitter{% endcomment %}
-            <meta name="twitter:card" content="{% block meta_tw_card %}summary{% endblock %}" />
-            <meta name="twitter:url" content="{% block meta_tw_url %}{{ ABSURL }}{% endblock %}" />
-            <meta name="twitter:title" content="{% block meta_tw_title %}{{ config.TWITTER_TITLE }}{% endblock %}" />
-            <meta name="twitter:description" content="{% block meta_tw_description %}{{ config.TWITTER_DESCRIPTION }}{% endblock %}" />
-            {% if config.TWITTER_CREATOR %}
-                <meta name="twitter:creator" content="{% block meta_tw_creator %}{{ config.TWITTER_CREATOR }}{% endblock %}" />
-            {% endif %}
-            <meta name="twitter:image" content="{% block meta_tw_image %}{{ config.TWITTER_IMAGE }}{% endblock %}" />
-            {% block meta_tw_extra %}{% endblock %}
-        {% endblock %}
-        {% stylesheet 'vendor' %}
-        {% stylesheet '{% endraw %}{{ cookiecutter.repo_name }}{% raw %}' %}
-        {% block extra_css %}{% endblock %}
-        <script src="{% static '{% endraw %}{{ cookiecutter.core_name }}{% raw %}/src/vendor/jquery/jquery.min.js' %}"></script>
-        {% javascript 'vendor' %}
-        {% javascript '{% endraw %}{{ cookiecutter.repo_name }}{% raw %}' %}
-        {% block extra_js %}{% endblock %}
-    </head>
-    <body class="{% block body_css %}{% endblock %}">
-        {% block navbar %}
-            <nav class="navbar navbar-dark bg-dark navbar-expand-lg">
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsing-navbar">
-                    &#9776;
-                </button>
-                <a class="navbar-brand" href="/">{% endraw %}{{ cookiecutter.project_name }}{% raw %}</a>
-                <div class="collapse navbar-collapse" id="collapsing-navbar">
-                    <ul class="nav navbar-nav">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
-                        </li>
-                    </ul>
+    {% load pipeline %}
+    <!DOCTYPE html>
+    <html>
+        <head>
+            <meta charset="utf-8" />
+            <meta content="width=device-width, initial-scale=1.0" name="viewport">
+            <title>{% block title %}{{ config.SITE_TITLE }}{% endblock %}</title>
+            {% block meta %}
+                <meta name="title" content="{% block meta_title %}{{ config.META_TITLE }}{% endblock %}" />
+                <meta name="description" content="{% block meta_description %}{{ config.META_DESCRIPTION }}{% endblock %}" />
+                <meta name="keywords" content="{% block meta_keywords %}{{ config.META_KEYWORDS }}{% endblock %}" />
+                {% block meta_extra %}{% endblock %}
+                {% comment %}Open Graph{% endcomment %}
+                <meta property="og:title" content="{% block meta_og_title %}{{ config.OG_TITLE }}{% endblock %}" />
+                <meta property="og:type" content="{% block meta_og_type %}{{ config.OG_TYPE }}{% endblock %}" />
+                <meta property="og:url" content="{% block meta_og_url %}{{ ABSURL }}{% endblock %}" />
+                <meta property="og:description" content="{% block meta_og_description %}{{ config.OG_DESCRIPTION }}{% endblock %}" />
+                <meta property="og:image" content="{% block meta_og_image %}{{ config.OG_IMAGE }}{% endblock %}" />
+                {% block meta_og_extra %}{% endblock %}
+                {% comment %}Twitter{% endcomment %}
+                <meta name="twitter:card" content="{% block meta_tw_card %}summary{% endblock %}" />
+                <meta name="twitter:url" content="{% block meta_tw_url %}{{ ABSURL }}{% endblock %}" />
+                <meta name="twitter:title" content="{% block meta_tw_title %}{{ config.TWITTER_TITLE }}{% endblock %}" />
+                <meta name="twitter:description" content="{% block meta_tw_description %}{{ config.TWITTER_DESCRIPTION }}{% endblock %}" />
+                {% if config.TWITTER_CREATOR %}
+                    <meta name="twitter:creator" content="{% block meta_tw_creator %}{{ config.TWITTER_CREATOR }}{% endblock %}" />
+                {% endif %}
+                <meta name="twitter:image" content="{% block meta_tw_image %}{{ config.TWITTER_IMAGE }}{% endblock %}" />
+                {% block meta_tw_extra %}{% endblock %}
+            {% endblock %}
+            {% stylesheet 'vendor' %}
+            {% stylesheet '{% endraw %}{{ cookiecutter.repo_name }}{% raw %}' %}
+            {% block extra_css %}{% endblock %}
+            {% javascript 'vendor' %}
+            {% javascript '{% endraw %}{{ cookiecutter.repo_name }}{% raw %}' %}
+            {% block extra_js %}{% endblock %}
+        </head>
+        <body class="{% block body_css %}{% endblock %}">
+            {% block navbar %}
+                <div class="ui top menu navbar main-navbar">
+                    <a class="item" onclick="core.IS_LOGO_LINK_ACTIVE = false; $('.ui.sidebar').sidebar({transition: 'push', onHidden: function() { $('body').removeClass('pushable'); core.IS_LOGO_LINK_ACTIVE = true }}).sidebar('toggle')" href="javascript:void(0)">
+                        <i class="icon big bars"></i>
+                    </a>
+                    <a class="item no-border" href="javascript:void(0)" onclick="if(core.IS_LOGO_LINK_ACTIVE) location.href='/'">
+                        {% endraw %}{{ cookiecutter.project_name }}{% raw %}
+                    </a>
                 </div>
-            </nav>
-        {% endblock %}
-        {% block jumbotron %}{% endblock %}
-        {% block content %}{% endblock %}
-        <footer>
-            <div class="container">
-            </div>
-        </footer>
-    </body>
+            {% endblock %}
+            {% block jumbotron %}{% endblock %}
+            {% block content %}{% endblock %}
+            <footer>
+                <div class="container">
+                </div>
+            </footer>
+        </body>
 </html>{% endraw %}

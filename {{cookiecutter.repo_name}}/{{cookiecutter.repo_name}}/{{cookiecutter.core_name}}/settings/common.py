@@ -80,6 +80,7 @@ INSTALLED_APPS = (
     'filer',
     {% endif %}
     'django_cleanup',
+    'subject_imagefield',
     'captcha',
     'subject_imagefield',
     'easy_thumbnails',
@@ -289,10 +290,12 @@ PIPELINE = {
         'vendor': {
             'source_filenames': (
                 '{{ cookiecutter.core_name }}/src/vendor/Font-Awesome/scss/font-awesome.scss', # noqa
+                'core/src/vendor/swiper/css/swiper.min.css', # noqa
+                'core/src/vendor/semantic-ui/semantic.min.css', # noqa
             ),
             'output_filename': '{{ cookiecutter.core_name }}/css/vendor.min.css', # noqa
         },
-        '{{ cookiecutter.repo_name }}': { # bootstrap + custom
+        '{{ cookiecutter.repo_name }}': { # custom
             'source_filenames': (
                 '{{ cookiecutter.core_name }}/src/scss/styles.scss',
             ),
@@ -302,9 +305,12 @@ PIPELINE = {
     'JAVASCRIPT': {
         'vendor': {
             'source_filenames': (
-                '{{ cookiecutter.core_name }}/src/vendor/popper/popper.min.js', # noqa
-                '{{ cookiecutter.core_name }}/src/vendor/bootstrap/js/bootstrap.min.js', # noqa
-                '{{ cookiecutter.core_name }}/src/vendor/moment/moment-with-locales.min.js', # noqa
+                'core/src/vendor/jquery/jquery.min.js', # noqa
+                # 'core/src/vendor/jquery.form/jquery.form.js', # noqa
+                # 'core/src/vendor/jquery.formset/jquery.formset.js', # noqa
+                'core/src/vendor/tocca/tocca.min.js', # noqa
+                'core/src/vendor/semantic-ui/semantic.min.js', # noqa
+                'core/src/vendor/moment/moment-with-locales.min.js', # noqa
             ),
             'output_filename': '{{ cookiecutter.core_name }}/js/vendor.min.js'
         },
