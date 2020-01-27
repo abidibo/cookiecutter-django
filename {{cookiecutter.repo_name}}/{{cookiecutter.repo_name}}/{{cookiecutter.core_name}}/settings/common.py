@@ -80,7 +80,6 @@ INSTALLED_APPS = (
     'filer',
     {% endif %}
     'django_cleanup',
-    'subject_imagefield',
     'captcha',
     'subject_imagefield',
     'easy_thumbnails',
