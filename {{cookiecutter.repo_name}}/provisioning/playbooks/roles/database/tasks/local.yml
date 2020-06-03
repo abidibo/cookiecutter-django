@@ -9,7 +9,7 @@
       apt: name=mysql-server state=present
 
     - pip:
-      name: PyMySQL
+        name: PyMySQL
 
     - name: install python3-pymysql
       become: true
