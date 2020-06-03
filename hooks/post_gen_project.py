@@ -16,6 +16,7 @@
 
 import os
 import shutil
+import collections
 
 context = {{ cookiecutter }}
 
