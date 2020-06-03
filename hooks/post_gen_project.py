@@ -16,7 +16,7 @@
 
 import os
 import shutil
-import collections
+from collections import OrderedDict
 
 context = {{ cookiecutter }}
 
