@@ -62,7 +62,6 @@ Running this you will have:
 
 ## Constraints
 
-- mysql everywhere and already installed in the __local__ machine
 - environment variables for configuration
 
 ## Frontend
@@ -81,6 +80,10 @@ jQuery as js framework, bootstrap as css framework, momentjs to deal with dateti
 Install cookiecutter
 
 `$ pip install cookiecutter`
+
+Install ansible (and run it under python3)
+
+`pip3 install ansible`
 
 Run cookiecutter against this repo
 
