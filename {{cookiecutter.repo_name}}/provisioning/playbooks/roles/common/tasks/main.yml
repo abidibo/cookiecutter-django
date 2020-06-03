@@ -14,6 +14,7 @@
       become_method: sudo
       apt: name={{ item }} state=present update_cache=yes
       with_items:
+        - mysql-server
         - libmysqlclient-dev
         - libfreetype6-dev
         - zlib1g-dev
