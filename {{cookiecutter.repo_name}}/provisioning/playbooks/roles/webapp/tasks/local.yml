@@ -8,7 +8,7 @@
 ##
 ---
     - name: Install requirements
-      pip: requirements={{ base_dir }}/{{ repo_name }}/requirements/{{ provisioning }}.txt virtualenv={{ base_dir }}/.virtualenv virtualenv_command=pyvenv
+      pip: requirements={{ base_dir }}/{{ repo_name }}/requirements/{{ provisioning }}.txt virtualenv={{ base_dir }}/.virtualenv virtualenv_command="python3 -m venv"
 
     # Run syncdb on the application
     - name: Sync DB
