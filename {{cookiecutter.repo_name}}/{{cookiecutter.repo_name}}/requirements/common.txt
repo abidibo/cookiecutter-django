@@ -1,4 +1,4 @@
-Django==2.2
+Django==2.2.10
 django-ckeditor==5.6.1
 django-constance==2.4.0
 django-cleanup==3.2.0
@@ -15,7 +15,7 @@ easy-thumbnails==2.6
 sorl-thumbnail==12.5.0
 django-subject-imagefield==0.2.3
 Fabric==1.14.0
-Pillow==6.0.0
+Pillow==7.1.2
 mysqlclient==1.4.2.post1
 python-dotenv==0.10.1
 {% if cookiecutter.use_disqus == 'y' %}
