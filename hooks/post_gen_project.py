@@ -28,4 +28,3 @@ if context['admin'] != 'django-baton':
 
 shutil.move('gitignore', '.gitignore')
 os.system('./bin/ansible_local')
-os.system('source ./.virtualenv/bin/activate')
