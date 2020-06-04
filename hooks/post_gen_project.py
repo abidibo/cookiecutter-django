@@ -17,6 +17,7 @@
 import os
 import shutil
 from collections import OrderedDict
+import subprocess
 
 context = {{ cookiecutter }}
 
@@ -28,4 +29,3 @@ if context['admin'] != 'django-baton':
 
 shutil.move('gitignore', '.gitignore')
 os.system('./bin/ansible_local')
-os.system('source ./.virtualenv/bin/activate')
