@@ -8,10 +8,12 @@
       become_method: sudo
       apt: name=mysql-server state=present
 
-    - name: install python-mysqldb
+    - name: Make sure pymysql is present
       become: true
       become_method: sudo
-      apt: name=python-mysqldb state=present
+      pip:
+        name: pymysql
+        state: present
 
     - name: create database
       become: true
