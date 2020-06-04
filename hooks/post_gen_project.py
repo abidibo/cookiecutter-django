@@ -17,7 +17,6 @@
 import os
 import shutil
 from collections import OrderedDict
-import subprocess
 
 context = {{ cookiecutter }}
 
