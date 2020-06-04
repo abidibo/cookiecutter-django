@@ -3,10 +3,17 @@
 # Db creation
 ##
 ---
-    - name: install python-mysqldb
+    - name: install mysql-server
       become: true
       become_method: sudo
-      apt: name=python-mysqldb state=present
+      apt: name=mysql-server state=present
+
+    - name: Make sure pymysql is present
+      become: true
+      become_method: sudo
+      pip:
+        name: pymysql
+        state: present
 
     - name: create database
       become: true
