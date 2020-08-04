@@ -136,7 +136,7 @@ And visit http://localhost:8000
   change them and then launch `bin/ansible_local` manually
 
 
-- change the SECRET\_KEY:
+- change the SECRET_KEY:
 
     `$ dotenv set SECRET_KEY <secret_key_here>`
 
@@ -167,7 +167,7 @@ If you see this error
 
     fatal: [remote] => Using a SSH password instead of a key is not possible because Host Key checking is enabled and sshpass does not support this.  Please add this host's fingerprint to your known_hosts file to manage this host.
 
-means you missed adding an entry for one or more hosts in the ~/.ssh/known\_hosts file, it's enough to try an ssh connection in order to add the domain to your list, then relauch `bin/ansible_remote`
+means you missed adding an entry for one or more hosts in the ~/.ssh/known_hosts file, it's enough to try an ssh connection in order to add the domain to your list, then relauch `bin/ansible_remote`
 
 #### DB task error
 If an error occurs in the create db user task:
@@ -193,11 +193,11 @@ Be sure the provided remote user has ssh access to the remote host, then deploy 
     $ cd [repo_name]
     $ fab production deploy
 
-launched inside the root/repo\_name folder. This command does the following things:
+launched inside the `root/repo_name` folder. This command does the following things:
 
 - create an archive of the last repository revision
 - upload it to the server
-- untar it in a folder "app-revision\_id" inside the releases folder
+- untar it in a folder "`app-revision_id`" inside the releases folder
 - copy the .env file inside this folder
 - upgrade the virtualenv
 - collectstatic
@@ -218,23 +218,11 @@ When performing the first deploy you can create a superuser account using the sh
 If the deploy revision is broken, or introduces unexpected errors, with this command
 it is possible to rollback to the previous revision. Launching it another time will swap between the two revisions.
 
-#### restart\_uwsgi
-
-    $ fab production restart_uwsgi
-
-Restarts the uwsgi service
-
 #### reload\_server
 
-    $ fab production reload_server
+    $ fab production reloadServer
 
 Reloads the web server
-
-#### restart\_server
-
-    $ fab production restart_server
-
-Restarts the web server
 
 #### restart
 
@@ -242,18 +230,32 @@ Restarts the web server
 
 Restarts the uwsgi service and the web server
 
-#### dump\_db\_snapshot
+#### dumpDbSnapshot
 
-    $ fab production dump_db_snapshot
+    $ fab production dumpDbSnapshot
 
 Downloads the production current db snapshot in the backup folders. The dumped file has the remote current revision name.
 
-Requires the remote db user password.
+#### loadDbSnapshot
 
-#### load\_db\_snapshot
-
-    $ fab production load_db_snapshot
+    $ fab production loadDbSnapshot
 
 Loads the current remote db snapshot in the local db.
 
-Requires the remote db user password.
+#### offline
+
+    $ fab production offline
+
+Puts the site in maintenance mode
+
+#### online
+
+    $ fab production online
+
+Exits from maintenance mode
+
+#### getRemoteRevision
+
+    $ fab production getRemoteRevision
+
+Prints to screen the currently deployed revision
