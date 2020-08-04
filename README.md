@@ -218,7 +218,7 @@ When performing the first deploy you can create a superuser account using the sh
 If the deploy revision is broken, or introduces unexpected errors, with this command
 it is possible to rollback to the previous revision. Launching it another time will swap between the two revisions.
 
-#### reload\_server
+#### reloadServer
 
     $ fab production reloadServer
 
