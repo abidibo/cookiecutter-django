@@ -190,11 +190,11 @@ Be sure the provided remote user has ssh access to the remote host, then deploy 
     $ cd [repo_name]
     $ fab production deploy
 
-launched inside the root/repo\_name folder. This command does the following things:
+launched inside the `root/repo_name` folder. This command does the following things:
 
 - create an archive of the last repository revision
 - upload it to the server
-- untar it in a folder "app-revision\_id" inside the releases folder
+- untar it in a folder "`app-revision_id`" inside the releases folder
 - copy the .env file inside this folder
 - upgrade the virtualenv
 - collectstatic
@@ -215,23 +215,11 @@ When performing the first deploy you can create a superuser account using the sh
 If the deploy revision is broken, or introduces unexpected errors, with this command
 it is possible to rollback to the previous revision. Launching it another time will swap between the two revisions.
 
-#### restart\_uwsgi
+#### reloadServer
 
-    $ fab production restart_uwsgi
-
-Restarts the uwsgi service
-
-#### reload\_server
-
-    $ fab production reload_server
+    $ fab production reloadServer
 
 Reloads the web server
-
-#### restart\_server
-
-    $ fab production restart_server
-
-Restarts the web server
 
 #### restart
 
@@ -239,18 +227,32 @@ Restarts the web server
 
 Restarts the uwsgi service and the web server
 
-#### dump\_db\_snapshot
+#### dumpDbSnapshot
 
-    $ fab production dump_db_snapshot
+    $ fab production dumpDbSnapshot
 
 Downloads the production current db snapshot in the backup folders. The dumped file has the remote current revision name.
 
-Requires the remote db user password.
+#### loadDbSnapshot
 
-#### load\_db\_snapshot
-
-    $ fab production load_db_snapshot
+    $ fab production loadDbSnapshot
 
 Loads the current remote db snapshot in the local db.
 
-Requires the remote db user password.
+#### offline
+
+    $ fab production offline
+
+Puts the site in maintenance mode
+
+#### online
+
+    $ fab production online
+
+Exits from maintenance mode
+
+#### getRemoteRevision
+
+    $ fab production getRemoteRevision
+
+Prints to screen the currently deployed revision
