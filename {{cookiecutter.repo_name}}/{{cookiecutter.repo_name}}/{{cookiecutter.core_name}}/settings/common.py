@@ -155,6 +155,7 @@ CONSTANCE_CONFIG = {
     'META_TITLE': ('{{ cookiecutter.project_name }}', _('Meta title')),
     'META_DESCRIPTION': ('{{ cookiecutter.project_description }}', _('Meta description')),
     'META_KEYWORDS': ('', _('Meta keywords')),
+    'ROBOTS': ('User-agent: *\nDisallow:', _('Contents of robots.txt file')),
     'OG_TITLE': ('{{ cookiecutter.project_name }}', _('Open Graph title')),
     'OG_TYPE': ('website', _('Open Graph type')),
     'OG_DESCRIPTION': ('{{ cookiecutter.project_description }}', _('Open Graph description')),
@@ -166,7 +167,7 @@ CONSTANCE_CONFIG = {
 }
 
 CONSTANCE_CONFIG_FIELDSETS = {
-    'SEO': ('SITE_TITLE', 'META_TITLE', 'META_DESCRIPTION', 'META_KEYWORDS', ),
+    'SEO': ('SITE_TITLE', 'META_TITLE', 'META_DESCRIPTION', 'META_KEYWORDS', 'ROBOTS', ),
     'Facebook Sharing': ('OG_TITLE', 'OG_TYPE', 'OG_DESCRIPTION',
                             'OG_IMAGE', ),
     'Twitter Sharing': ('TWITTER_TITLE', 'TWITTER_DESCRIPTION',
