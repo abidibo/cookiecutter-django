@@ -44,6 +44,8 @@ urlpatterns = [
     # grappelli
     path('grappelli/', include('grappelli.urls')),
     {% endif %}
+    path('robots.txt', TemplateView.as_view(template_name='robots.txt'),
+         name='robots'),
 ]
 
 if settings.DEBUG:
