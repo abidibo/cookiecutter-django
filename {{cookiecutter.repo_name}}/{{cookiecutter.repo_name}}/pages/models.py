@@ -8,6 +8,8 @@ from django.utils.encoding import iri_to_uri, python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 from taggit.managers import TaggableManager
 
+from .managers import PageManager
+
 
 @python_2_unicode_compatible
 class Page(models.Model):
@@ -71,6 +73,8 @@ class Page(models.Model):
         blank=True,
         null=True,
         help_text=_('default to page tags'))
+
+    objects = PageManager()
 
     class Meta:
         verbose_name = _('page')

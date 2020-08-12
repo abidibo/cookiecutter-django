@@ -25,6 +25,12 @@ from django.views.generic import TemplateView
 from django.views import static
 from django.contrib.staticfiles.views import serve
 
+from pages.sitemap import PageSitemap
+
+sitemaps = {
+    'pages': PageSitemap
+}
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     {% if cookiecutter.admin == 'django-baton' %}
@@ -46,6 +52,8 @@ urlpatterns = [
     {% endif %}
     path('robots.txt', TemplateView.as_view(template_name='robots.txt'),
          name='robots'),
+    path('sitemap.xml', sitemap, {'sitemaps': sitemaps},
+         name='django.contrib.sitemaps.views.sitemap'),
 ]
 
 if settings.DEBUG:
