@@ -1,0 +1,1 @@
+<link href="{{ url }}" rel="stylesheet" type="{{ type }}"{% if media %} media="{{ media }}"{% else %} media="print"{% endif %}{% if title %} title="{{ title|default:"all" }}"{% endif %}{% if charset %} charset="{{ charset }}"{% endif %}{% if not media %} onload="this.media='all'"{% endif %} />
