@@ -16,5 +16,3 @@ CKEDITOR_CONFIGS['default']['contentsCss'] = [
     STATIC_URL + '{{ cookiecutter.core_name }}/css/vendor.min.css',
     STATIC_URL + '{{ cookiecutter.core_name }}/css/{{ cookiecutter.core_name }}.min.css',
     STATIC_URL + '{{ cookiecutter.core_name }}/src/css/ckeditor.css']
- 
-LOGGING['handlers']['file']['filename'] = here('..', '..', '..', '..', os.path.join('logs', 'debug.log'))
