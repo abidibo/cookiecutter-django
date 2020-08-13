@@ -347,9 +347,12 @@ THUMBNAIL_PROCESSORS = (
 
 # LOGGING
 
+LOG_LEVEL = env('LOG_LEVEL', 'INFO')
+LOG_FILE = env('LOG_FILE', here('..', '..', '..', os.path.join('logs', 'application.log')))
+
 LOGGING_DEFAULT = {
     'handlers': ['console', 'file'],
-    'level': 'DEBUG',
+    'level': LOG_LEVEL,
     'propagate': True,
 }
 
@@ -366,21 +369,20 @@ LOGGING = {
     },
     'handlers': {
        'null': {
-            'level': 'DEBUG',
+            'level': LOG_LEVEL,
             'class':'logging.NullHandler',
         },
         'console':{
-            'level': 'DEBUG',
+            'level': LOG_LEVEL,
             'class': 'logging.StreamHandler',
             'formatter': 'verbose'
         },
         # configure the log to be rotated daily
-        # see https://docs.python.org/2.7/library/logging.handlers.html#logging.handlers.TimedRotatingFileHandler
         'file': {
-            'level': 'DEBUG',
+            'level': LOG_LEVEL,
             'formatter': 'verbose',
             'class': 'logging.handlers.TimedRotatingFileHandler',
-            'filename': here('..', '..', '..', os.path.join('logs', 'debug.log')), # noqa
+            'filename': LOG_FILE, # noqa
             'when':     'midnight',
         },
 
@@ -393,7 +395,7 @@ LOGGING = {
     'loggers': {
         'django': {
             'handlers': ['file'],
-            'level': 'DEBUG',
+            'level': LOG_LEVEL,
             'propagate': True,
         },
        'django.template': {
@@ -410,9 +412,9 @@ LOGGING = {
        'django.db.backends': {
             'handlers': ['null'],  # Quiet by default!
             'propagate': False,
-            'level':'DEBUG',
+            'level': LOG_LEVEL,
         },
         '{{ cookiecutter.core_name }}': LOGGING_DEFAULT,
-        '':                             LOGGING_DEFAULT,# root logger
+        '': LOGGING_DEFAULT,
     },
 }
