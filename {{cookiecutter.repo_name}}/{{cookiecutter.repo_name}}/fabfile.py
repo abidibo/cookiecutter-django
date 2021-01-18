@@ -313,7 +313,7 @@ def dumpDbSnapshot(ctx):
     remote_tmp_file_path = '/tmp/dump_db.sql'
     c = get_connection(ctx)
     c.local(f"mkdir -p {here('..', 'backups')}")
-    c.run(f"mysqldump --user {{ cookiecutter.db_user }} --password db{{ cookiecutter.repo_name }} > {remote_tmp_file_path}",  # noqa
+    c.run(f"mysqldump --no-tablespaces --user {{ cookiecutter.db_user }} --password db{{ cookiecutter.repo_name }} > {remote_tmp_file_path}",  # noqa
           pty=True,
           watchers=[db_password_responder(ctx)])
 
