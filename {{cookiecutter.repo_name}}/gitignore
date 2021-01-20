@@ -7,6 +7,7 @@
 provisioning/ansible_remote_variables
 provisioning/ansible_remote_inventory
 provisioning/playbooks/roles/webapp/templates/env
+provisioning/playbooks/roles/database/templates/my.cnf
 releases
 logs
 tags
