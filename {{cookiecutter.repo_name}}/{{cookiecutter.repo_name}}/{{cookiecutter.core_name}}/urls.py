@@ -20,6 +20,7 @@ from baton.autodiscover import admin
 {% else %}
 from django.contrib import admin
 {% endif %}
+from django.contrib.sitemaps.views import sitemap
 from django.conf import settings
 from django.views.generic import TemplateView
 from django.views import static
