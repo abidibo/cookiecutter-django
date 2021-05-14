@@ -1,0 +1,3 @@
+-r common.txt
+
+uwsgi==2.0.19.1

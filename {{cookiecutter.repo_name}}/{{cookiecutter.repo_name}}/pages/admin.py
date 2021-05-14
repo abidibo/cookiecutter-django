@@ -10,7 +10,7 @@ from .models import Page
 class PageAdmin(ArchivedModelAdmin):
     form = PageForm
 
-    {% if cookiecutter.admin == 'django-baton' %}
+    {% if cookiecutter.use_django_baton == 'y' %}
     fieldsets = (
         (_('Main'), {
             'fields': ('status', 'parent', 'url', 'title', 'content', 'tags',

@@ -1,36 +1,25 @@
-Django==2.2
-django-ckeditor==5.6.1
-django-constance==2.4.0
-django-cleanup==3.2.0
-django-getenv==1.3.2
-django-extensions==2.2.1
-django-mptt==0.9.1
-django-pipeline==1.6.14
-django-simple-captcha==0.5.11
-django-taggit==1.1.0
-django-picklefield==2.0
-easy-thumbnails==2.6
-sorl-thumbnail==12.5.0
-django-subject-imagefield==0.2.3
-Fabric==2.5.0
-patchwork==1.0.1
-Pillow==6.0.0
-mysqlclient==1.4.2.post1
-python-dotenv==0.10.1
-{% if cookiecutter.use_disqus == 'y' %}
-django-disqus==0.5
+psycopg2==2.8.6
+python-dotenv==0.17.1
+django==3.2.2
+django-constance[database]==2.8.0
+django-cleanup==5.2.0
+django-extensions==3.1.3
+django-mptt==0.12.0
+django-pipeline==2.0.6
+django-taggit==1.4.0
+django-lineup==0.3.0
+django-subject-imagefield==0.2.6
+django-ckeditor==6.0.0
+sorl-thumbnail==12.7.0
+{% if cookiecutter.use_django_baton == 'y' %}
+django-baton==2.1.5
 {% endif %}
-{% if cookiecutter.admin == 'django-baton' %}
-django-baton==1.5.4
-{% elif cookiecutter.admin == 'django-suit' %}
-django-suit==0.2.26
-{% elif cookiecutter.admin == 'django-grappelli' %}
-django-grappelli==2.12.2
+{% if cookiecutter.use_user_agents == 'y' %}
+django-user-agents==0.4.0
 {% endif %}
 {% if cookiecutter.use_filer == 'y' %}
-django-filer==1.4.4
+django-filer==2.0.2
 {% endif %}
-PyYAML==5.1
-ua-parser==0.8.0
-user-agents==2.0
-django-user-agents==0.3.2
+{% if cookiecutter.use_simple_captcha == 'y' %}
+django-simple-captcha==0.5.14
+{% endif %}

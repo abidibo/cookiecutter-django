@@ -1,18 +1,9 @@
-'''This module sets the configuration for a local development
-
-'''
-from .common import *
-
-import os
-
-DEBUG = False
+from .remote import *
 
 ALLOWED_HOSTS = ['{{ cookiecutter.domain }}',]
 
-STATIC_ROOT = '{{ cookiecutter.webapp_dir }}/static/'
-MEDIA_ROOT = '{{ cookiecutter.webapp_dir }}/media'
-# CKEDITOR
-CKEDITOR_CONFIGS['default']['contentsCss'] = [
-    STATIC_URL + '{{ cookiecutter.core_name }}/css/vendor.min.css',
-    STATIC_URL + '{{ cookiecutter.core_name }}/css/{{ cookiecutter.core_name }}.min.css',
-    STATIC_URL + '{{ cookiecutter.core_name }}/src/css/ckeditor.css']
+SECURE_HSTS_SECONDS = 5
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+SECURE_SSL_REDIRECT = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True

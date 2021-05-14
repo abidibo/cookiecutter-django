@@ -14,17 +14,17 @@
 # 9 - Activates the created virtualenv
 ##
 
-import os
-import shutil
+from os import system
+from shutil import move, rmtree
 from collections import OrderedDict
 
 context = {{ cookiecutter }}
 
-if context['admin'] != 'django-baton':
+if context['use_django_baton'] == 'n':
     print('\n')
     print('POST HOOK' + '\n')
     print('removing unused baton and constance admin template' + '\n')
-    shutil.rmtree('./{{ cookiecutter.repo_name }}/{{ cookiecutter.core_name }}/templates/admin')
+    rmtree('./{{ cookiecutter.repo_name }}/{{ cookiecutter.core_name }}/templates/admin')
 
-shutil.move('gitignore', '.gitignore')
-os.system('./bin/ansible_local')
+move('gitignore', '.gitignore')
+#system('./bin/ansible_local')

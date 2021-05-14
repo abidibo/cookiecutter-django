@@ -1,9 +1,10 @@
 *.swp
 *.pyc
-{{ cookiecutter.repo_name }}/.env
 .virtualenv
+{{ cookiecutter.repo_name }}/.env
 {{ cookiecutter.repo_name }}/media
 {{ cookiecutter.repo_name }}/static
+{{ cookiecutter.repo_name }}/logs
 provisioning/ansible_remote_variables
 provisioning/ansible_remote_inventory
 provisioning/playbooks/roles/webapp/templates/env

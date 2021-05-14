@@ -1,33 +1,13 @@
-# -*- coding: utf-8 -*-
-"""
-Django settings for {{ cookiecutter.project_name }} project.
-"""
-
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-import os
+from os import getenv
+from pathlib import Path
 from dotenv import load_dotenv
-from getenv import env
-
 from django.utils.translation import ugettext_lazy as _
 
-here = lambda *x: os.path.join(os.path.dirname( # noqa
-                               os.path.realpath(__file__)), *x)
+load_dotenv()
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))) # noqa
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
-dotenv_path = here('..', '..', '.env')
-load_dotenv(dotenv_path)
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env('SECRET_KEY', '49saa%ruey1&!nveiz*f(cu$)0pje8wz7u++y-0ljd2)9r)j8h') # noqa
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-
-ALLOWED_HOSTS = []
+SECRET_KEY = getenv('SECRET_KEY')
 
 ADMINS = (
     ('{{ cookiecutter.author }}', '{{ cookiecutter.email }}'),
@@ -35,35 +15,38 @@ ADMINS = (
 
 AUTH_USER_MODEL = 'core.User'
 
-# SITE
 SITE_ID = 1
 
-# MAIL
 EMAIL_HOST = 'localhost'
 EMAIL_PORT = 25
 
-# Database
-# https://docs.djangoproject.com/en/1.8/ref/settings/#databases
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': env('DB_NAME', 'db{{ cookiecutter.repo_name }}'),
-        'HOST': env('DB_HOST', 'localhost'),
-        'USER': env('DB_USER', '{{ cookiecutter.repo_name }}'),
-        'PASSWORD': env('DB_PASSWORD', required=True),
-        'PORT': '',
-        'OPTIONS': {
-            'init_command': 'SET default_storage_engine=InnoDB',
-        }
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': getenv('DB_NAME'),
     }
 }
 
-# Application definition
+AUTH_PASSWORD_VALIDATORS = [
+    {
+        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+    },
+]
 
 INSTALLED_APPS = (
     '{{ cookiecutter.core_name }}',
-    {% if cookiecutter.admin == 'django-baton' %}'baton',{% elif cookiecutter.admin == 'django-suit' %}'suit',{% elif cookiecutter.admin == 'django-grappelli' %}'grappelli',{% endif %}
+    {% if cookiecutter.use_django_baton == 'y' %}
+    'baton',
+    {% endif %}
     'django.contrib.sites',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -72,39 +55,46 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sitemaps',
-    'ckeditor',
-    'ckeditor_uploader',
-    'django_user_agents',
     'django_extensions',
-    'pipeline',
-    {% if cookiecutter.use_filer == 'y' %}
-    'filer',
-    {% endif %}
     'django_cleanup',
-    'captcha',
-    'subject_imagefield',
-    'easy_thumbnails',
-    'sorl.thumbnail',
-    {% if cookiecutter.use_disqus == 'y' %}'disqus',{% endif %}
-    'taggit',
-    'mptt',
-    'treenav',
-    'apps.SettingsConfig',
     'pages',
     'constance.backends.database',
-    {% if cookiecutter.admin == 'django-baton' %}'baton.autodiscover',{% endif %}
+    'lineup.apps.LineupConfig',
+    'taggit',
+    'subject_imagefield',
+    'sorl.thumbnail',
+    'pipeline',
+    'ckeditor',
+    'ckeditor_uploader',
+    {% if cookiecutter.use_user_agents == 'y' %}
+    'django_user_agents',
+    {% endif %}
+    {% if cookiecutter.use_filer == 'y' %}
+    'easy_thumbnails'
+    'filer',
+    {% endif %}
+    'mptt',
+    {% if cookiecutter.use_simple_captcha == 'y' %}
+    'captcha',
+    {% endif %}
+    'apps.SettingsConfig',
+    {% if cookiecutter.use_django_baton == 'y' %}
+    'baton.autodiscover',
+    {% endif %}
 )
 
 MIDDLEWARE = (
+    'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django.middleware.security.SecurityMiddleware',
     'pages.middleware.PageFallbackMiddleware',
+    {% if cookiecutter.use_user_agents == 'y' %}
     'django_user_agents.middleware.UserAgentMiddleware',
+    {% endif %}
 )
 
 ROOT_URLCONF = '{{ cookiecutter.core_name }}.urls'
@@ -115,14 +105,12 @@ TEMPLATES = [
         'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
-            'debug': False,
             'context_processors': [
                 'constance.context_processors.config',
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'treenav.context_processors.treenav_active',
                 '{{ cookiecutter.core_name }}.context_processors.debug',
                 '{{ cookiecutter.core_name }}.context_processors.absurl',
             ],
@@ -136,7 +124,6 @@ TEMPLATES = [
 WSGI_APPLICATION = '{{ cookiecutter.core_name }}.wsgi.application'
 
 # Internationalization
-# https://docs.djangoproject.com/en/1.8/topics/i18n/
 
 LANGUAGE_CODE = '{{ cookiecutter.language_code }}'
 
@@ -148,7 +135,8 @@ USE_L10N = True
 
 USE_TZ = True
 
-# CONSTANCE
+# Constance
+
 CONSTANCE_BACKEND = 'constance.backends.database.DatabaseBackend'
 CONSTANCE_CONFIG = {
     'HIDE_ARCHIVED': (True, _('Hide from admin lists archived records')),
@@ -177,24 +165,25 @@ CONSTANCE_CONFIG_FIELDSETS = {
 }
 
 # Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.8/howto/static-files/
 
-STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
+STATICFILES_STORAGE = 'pipeline.storage.PipelineStorage'
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
     'pipeline.finders.PipelineFinder',
 )
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # Uploaded files
+
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 FILE_UPLOAD_PERMISSIONS = 0o644
 
-# ADMIN
-{% if cookiecutter.admin == 'django-baton' %}
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+{% if cookiecutter.use_django_baton == 'y' %}
+# Admin
+
 BATON = {
     'SITE_HEADER': '{{ cookiecutter.project_name }}',
     'SITE_TITLE': '{{ cookiecutter.project_name }}',
@@ -217,44 +206,19 @@ BATON = {
         {'type': 'title', 'label': 'Contents',  'apps': ('pages', )},
         {'type': 'model', 'app': 'pages', 'name': 'page', 'label': 'Pages', 'icon':'fa fa-book'},
     ),
-    'COPYRIGHT': '© 2017 {{ cookiecutter.domain }}',
+    'COPYRIGHT': '© {% now 'utc', '%Y' %} {{ cookiecutter.domain }}',
     'SUPPORT_HREF': 'mailto:stefano.contini@otto.to.it',
     'POWERED_BY': '<a href="https://www.abidibo.net">abidibo</a>'
 }
-{% elif cookiecutter.admin == 'django-grappelli' %}
-GRAPPELLI_ADMIN_TITLE = '{{ cookiecutter.project_name }} - Amministrazione'
-{% elif cookiecutter.admin == 'django-suit' %}
-SUIT_CONFIG = {
-    'ADMIN_NAME': '{{ cookiecutter.project_name }}',
-    'MENU': (
-
-        '-',
-
-        {'app': 'auth', 'label': 'Authentication', 'icon':'icon-lock'},
-        {'app': 'sites', 'label': 'Sites', 'icon':'icon-leaf'},
-        {'app': 'constance', 'label': 'Settings', 'icon':'icon-cog'},
-
-        {% if cookiecutter.use_filer == 'y' %}
-        '-',
-
-        {'app': 'filer', 'label': 'Files', 'icon':'icon-file'},
-
-        {% endif %}
-        '-',
-
-        {'app': 'treenav', 'label': 'Menu', 'icon':'icon-align-justify'},
-        {'app': 'pages', 'label': 'Pages', 'icon':'icon-book'},
-
-    )
-}
 {% endif %}
 
-# TAGGIT
+# Taggit
+
 TAGGIT_CASE_INSENSITIVE = True
 
-# CKEDITOR
+# Ckeditor
+
 CKEDITOR_UPLOAD_PATH = 'ckeditor/'
-CKEDITOR_JQUERY_URL = ''
 CKEDITOR_IMAGE_BACKEND = 'pillow'
 CKEDITOR_CONFIGS = {
     'default': {
@@ -285,12 +249,14 @@ CKEDITOR_CONFIGS = {
     }
 }
 
-# pipeline
+# Pipeline
+
 PIPELINE = {
     'STYLESHEETS': {
         'vendor': {
             'source_filenames': (
                 '{{ cookiecutter.core_name }}/src/vendor/Font-Awesome/scss/font-awesome.scss', # noqa
+                '{{ cookiecutter.core_name }}/app/node_modules/bootstrap/dist/css/bootstrap.min.css' # noqa
             ),
             'output_filename': '{{ cookiecutter.core_name }}/css/vendor.min.css', # noqa
         },
@@ -304,15 +270,13 @@ PIPELINE = {
     'JAVASCRIPT': {
         'vendor': {
             'source_filenames': (
-                '{{ cookiecutter.core_name }}/src/vendor/popper/popper.min.js', # noqa
-                '{{ cookiecutter.core_name }}/src/vendor/bootstrap/js/bootstrap.min.js', # noqa
-                '{{ cookiecutter.core_name }}/src/vendor/moment/moment-with-locales.min.js', # noqa
+                '{{ cookiecutter.core_name }}/app/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js', # noqa
             ),
             'output_filename': '{{ cookiecutter.core_name }}/js/vendor.min.js'
         },
         '{{ cookiecutter.repo_name }}': {
             'source_filenames': (
-                '{{ cookiecutter.core_name }}/src/js/{{ cookiecutter.core_name }}.js', # noqa
+                '{{ cookiecutter.core_name }}/app/src/js/{{ cookiecutter.core_name }}.js', # noqa
             ),
             'output_filename': '{{ cookiecutter.core_name }}/js/{{ cookiecutter.core_name }}.min.js' # noqa
         },
@@ -329,12 +293,9 @@ PIPELINE = {
     )
 }
 
-{% if cookiecutter.use_disqus == 'y' %}
-DISQUS_API_KEY = ''
-DISQUS_WEBSITE_SHORTNAME = ''
-{% endif %}
-
 {% if cookiecutter.use_filer == 'y' %}
+# Filer
+
 THUMBNAIL_HIGH_RESOLUTION = True
 THUMBNAIL_PROCESSORS = (
     'easy_thumbnails.processors.colorspace',
@@ -345,10 +306,9 @@ THUMBNAIL_PROCESSORS = (
 )
 {% endif %}
 
-# LOGGING
+# Logging
 
-LOG_LEVEL = env('LOG_LEVEL', 'INFO')
-LOG_FILE = env('LOG_FILE', here('..', '..', '..', os.path.join('logs', 'application.log')))
+LOG_LEVEL = getenv('LOG_LEVEL', 'INFO')
 
 LOGGING_DEFAULT = {
     'handlers': ['console', 'file'],
@@ -382,7 +342,6 @@ LOGGING = {
             'level': LOG_LEVEL,
             'formatter': 'verbose',
             'class': 'logging.handlers.TimedRotatingFileHandler',
-            'filename': LOG_FILE, # noqa
             'when':     'midnight',
         },
 
