@@ -11,7 +11,6 @@
     "repo_name": "{{ cookiecutter.project_name|lower|replace(' ', '-') }}",
     "core_name": "core",
     "use_django_baton": "y",
-    "use_ckeditor": "n",
     "use_filer": "n",
     "use_user_agents": "n",
     "use_simple_captcha": "n",

@@ -24,11 +24,9 @@ TEMPLATES[0]['OPTIONS']['debug'] = True
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-{% if cookiecutter.use_ckeditor == 'y' %}
 # Ckeditor
 
 CKEDITOR_CONFIGS['default']['contentsCss'] = [
     STATIC_URL + '{{ cookiecutter.core_name }}/src/vendor/Font-Awesome/scss/font-awesome.css',
     STATIC_URL + '{{ cookiecutter.core_name }}/src/scss/styles.css',
     STATIC_URL + '{{ cookiecutter.core_name }}/src/css/ckeditor.css']
-{% endif %}
