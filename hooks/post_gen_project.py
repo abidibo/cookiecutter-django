@@ -14,17 +14,24 @@
 # 9 - Activates the created virtualenv
 ##
 
-from os import system
 from shutil import move, rmtree
+from subprocess import run
 from collections import OrderedDict
 
 context = {{ cookiecutter }}
 
+print('\n' + 'POST HOOK' + '\n')
+
 if context['use_django_baton'] == 'n':
-    print('\n')
-    print('POST HOOK' + '\n')
-    print('removing unused baton and constance admin template' + '\n')
+    print('Remove unused baton and constance admin template' + '\n')
     rmtree('./{{ cookiecutter.repo_name }}/{{ cookiecutter.core_name }}/templates/admin')
 
+print('Enable gitignore')
 move('gitignore', '.gitignore')
-#system('./bin/ansible_local')
+
+print('Launch saltstack')
+run(['sh', 'local.sh'], cwd='provisioning')
+
+# print('Create python virtual enironment')
+# run(['pyenv', 'virtualenv', '{{cookiecutter.python_version}}' '{{cookiecutter.repo_name|replace('-', '')}}'])
+# run(['pyenv', 'local', '{{cookiecutter.repo_name|replace('-', '')}}'])

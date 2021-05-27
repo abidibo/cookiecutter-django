@@ -1,7 +1,0 @@
-{% raw %}
----
-    - import_tasks: local.yml
-      when: provisioning == 'local'
-    - import_tasks: remote.yml
-      when: provisioning == 'remote'
-{% endraw %}

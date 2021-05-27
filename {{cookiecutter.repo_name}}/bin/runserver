@@ -1,2 +1,0 @@
-#!/bin/bash
-python {{ cookiecutter.repo_name }}/manage.py runserver 0.0.0.0:8000
