@@ -6,7 +6,7 @@ ALLOWED_HOSTS = []
 
 STATIC_ROOT = BASE_DIR / 'static'
 MEDIA_ROOT = BASE_DIR / 'media'
-LOGGING['handlers']['file']['filename'] = BASE_DIR / 'logs' / '..' / 'application.log'
+LOGGING['handlers']['file']['filename'] = BASE_DIR / '../logs/application.log'
 
 INTERNAL_IPS = ('127.0.0.1', )  # debug toolbar
 
